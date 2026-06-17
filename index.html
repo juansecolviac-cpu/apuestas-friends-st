@@ -298,6 +298,13 @@ return db - da;
 
 });
 
+  console.log(
+data.map(x => ({
+partido:x.partido,
+fecha:x.fecha
+}))
+);
+
 document.getElementById("history").innerHTML=data.map(m=>`
 <div class="card partido-card">
 <h3>${m.partido}</h3>
