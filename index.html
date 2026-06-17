@@ -72,12 +72,22 @@ Resultado:
 </div>
 
 <h2>📜 Historial Completo</h2>
+  <input
+id="buscarPartidos"
+placeholder="Buscar partido..."
+onkeyup="filtrarPartidos()"
+style="width:300px;max-width:100%;margin-bottom:10px;">
 <button class="primary" id="btnBorrar" style="display:none" onclick="borrarHistorial()">🗑️ Borrar Historial</button>
 <div id="history"></div>
 </div>
 
   <div id="apuestas" class="card hidden">
 <h2>📋 Comparativo de Apuestas</h2>
+    <input
+id="buscarApuestas"
+placeholder="Buscar apuesta..."
+onkeyup="filtrarApuestas()"
+style="width:300px;max-width:100%;margin-bottom:10px;">
 <div id="tablaApuestas"></div>
 </div>
   
@@ -264,7 +274,7 @@ data.push(d.data());
 });
 
 document.getElementById("history").innerHTML=data.map(m=>`
-<div class="card">
+<div class="card partido-card">
 <h3>${m.partido}</h3>
 📅 ${m.fecha}<br>
 🌎 ${m.sede}<br>
@@ -315,7 +325,7 @@ snapshot.forEach(doc=>{
 let m = doc.data();
 
 html += `
-<div class="card">
+<div class="card apuesta-card">
 <h3>${m.partido}</h3>
 
 <table>
@@ -351,12 +361,46 @@ html += `
 document.getElementById("tablaApuestas").innerHTML = html;
 
 }
+
+  function filtrarPartidos(){
+
+let texto = document.getElementById("buscarPartidos").value.toLowerCase();
+
+document.querySelectorAll(".partido-card").forEach(card=>{
+
+if(card.innerText.toLowerCase().includes(texto)){
+card.style.display="";
+}else{
+card.style.display="none";
+}
+
+});
+
+}
+
+function filtrarApuestas(){
+
+let texto = document.getElementById("buscarApuestas").value.toLowerCase();
+
+document.querySelectorAll(".apuesta-card").forEach(card=>{
+
+if(card.innerText.toLowerCase().includes(texto)){
+card.style.display="";
+}else{
+card.style.display="none";
+}
+
+});
+
+}
   
   window.login = login;
 window.showTab = showTab;
 window.saveMatch = saveMatch;
 window.calc = calc;
 window.borrarHistorial = borrarHistorial;
+  window.filtrarPartidos = filtrarPartidos;
+window.filtrarApuestas = filtrarApuestas;
 
 
 </script></body></html>
