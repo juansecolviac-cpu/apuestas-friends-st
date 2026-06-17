@@ -279,7 +279,10 @@ const snapshot = await getDocs(collection(db,"partidos"));
 let data=[];
 
 snapshot.forEach(d=>{
-data.push(d.data());
+data.push({
+id:d.id,
+...d.data()
+});
 });
 
 document.getElementById("history").innerHTML=data.map(m=>`
@@ -336,6 +339,12 @@ let m = doc.data();
 html += `
 <div class="card apuesta-card">
 <h3>${m.partido}</h3>
+
+<button
+class="primary"
+onclick="borrarPartido('${m.id}')">
+🗑️ Eliminar Partido
+</button><br><br>
 
 <table>
 <tr>
@@ -402,6 +411,19 @@ card.style.display="none";
 });
 
 }
+
+  async function borrarPartido(id){
+
+if(!confirm("¿Eliminar este partido?")) return;
+
+await deleteDoc(doc(db,"partidos",id));
+
+await loadHistory();
+await cargarApuestas();
+
+alert("Partido eliminado");
+
+}
   
   window.login = login;
 window.showTab = showTab;
@@ -410,6 +432,7 @@ window.calc = calc;
 window.borrarHistorial = borrarHistorial;
   window.filtrarPartidos = filtrarPartidos;
 window.filtrarApuestas = filtrarApuestas;
+  window.borrarPartido = borrarPartido;
 
 
 </script></body></html>
