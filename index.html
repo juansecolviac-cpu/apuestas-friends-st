@@ -296,8 +296,32 @@ JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,
 JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11
 };
 
-let da = new Date(fa[2], meses[fa[1].toUpperCase()], fa[0]);
-let db = new Date(fb[2], meses[fb[1].toUpperCase()], fb[0]);
+const meses = {
+JAN:0,
+FEB:1,
+MAR:2,
+APR:3,
+MAY:4,
+JUN:5,
+JUL:6,
+AUG:7,
+SEP:8,
+OCT:9,
+NOV:10,
+DEC:11
+};
+
+let da = new Date(
+Number(fa[2]),
+meses[fa[1].toUpperCase()],
+Number(fa[0])
+);
+
+let db = new Date(
+Number(fb[2]),
+meses[fb[1].toUpperCase()],
+Number(fb[0])
+);
 
 return db - da;
 
@@ -376,9 +400,32 @@ JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,
 JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11
 };
 
-let da = new Date(fa[2], meses[fa[1].toUpperCase()], fa[0]);
-let db = new Date(fb[2], meses[fb[1].toUpperCase()], fb[0]);
+const meses = {
+JAN:0,
+FEB:1,
+MAR:2,
+APR:3,
+MAY:4,
+JUN:5,
+JUL:6,
+AUG:7,
+SEP:8,
+OCT:9,
+NOV:10,
+DEC:11
+};
 
+let da = new Date(
+Number(fa[2]),
+meses[fa[1].toUpperCase()],
+Number(fa[0])
+);
+
+let db = new Date(
+Number(fb[2]),
+meses[fb[1].toUpperCase()],
+Number(fb[0])
+);
 return db - da;
 
 });
