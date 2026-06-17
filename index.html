@@ -67,16 +67,17 @@ Resultado:
 <input id="rb" type="number" style="width:60px"><br><br>
 
 <div id="inputs"></div>
-<button class="primary" id="btnGuardar">Guardar Partido</button>
+<button class="primary" onclick="saveMatch()">Guardar Partido</button>
 </div>
 
-<h2>📜 Historial Completo</h2><button <button class="primary" id="btnBorrar" style="display:none">🗑️ Borrar Historial</button>
+<h2>📜 Historial Completo</h2>
+<button class="primary" id="btnBorrar" style="display:none" onclick="borrarHistorial()">🗑️ Borrar Historial</button>
 <div id="history"></div>
 </div>
 
 <div id="tabla" class="card hidden">
 <h2>Clasificación</h2>
-<button class="primary" id="btnCalc">Actualizar</button>
+<button class="primary" onclick="calc()">Actualizar</button>
 <table>
 <thead><tr><th>Pos</th><th>Jugador</th><th>Puntos</th></tr></thead>
 <tbody id="rank"></tbody>
