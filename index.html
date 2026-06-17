@@ -197,16 +197,23 @@ snapshot.forEach(doc=>{
   data.push(doc.data());
 });
 
+console.log("PARTIDOS:", data);
+
 let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0};
+
 data.forEach(m=>{
-players.forEach(j=>{
-if(!m.bets[j].no) s[j]+=points(m.bets[j].a,m.bets[j].b,m.ra,m.rb);
+  players.forEach(j=>{
+    if(!m.bets[j].no){
+      s[j]+=points(m.bets[j].a,m.bets[j].b,m.ra,m.rb);
+    }
+  });
 });
-});
+
+console.log("PUNTOS:", s);
+
 let o=Object.entries(s).sort((a,b)=>b[1]-a[1]);
 rank.innerHTML=o.map((x,i)=>`<tr><td>${i==0?"🥇":i==1?"🥈":i==2?"🥉":i+1}</td><td>${x[0]}</td><td>${x[1]}</td></tr>`).join("");
 }
-
 async function loadHistory(){
 const snapshot = await getDocs(collection(db,"partidos"));
 let data = [];
