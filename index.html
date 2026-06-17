@@ -163,10 +163,17 @@ inputs.innerHTML=h;
 }
 
 async function saveMatch(){
+
+try{
+
 let bets={};
+
 players.forEach(j=>{
-bets[j]={no:document.getElementById(j+"no").value==="1",
-a:document.getElementById(j+"a").value,b:document.getElementById(j+"b").value};
+bets[j]={
+no:document.getElementById(j+"no").value==="1",
+a:Number(document.getElementById(j+"a").value||0),
+b:Number(document.getElementById(j+"b").value||0)
+};
 });
 
 await addDoc(collection(db,"partidos"),{
@@ -174,15 +181,22 @@ partido:paisA.value+" VS "+paisB.value,
 fecha:dd.value+"/"+mm.value+"/"+aa.value,
 sede:paisSede.value,
 estadio:estadio.value,
-ra:+ra.value,
-rb:+rb.value,
+ra:Number(ra.value||0),
+rb:Number(rb.value||0),
 bets:bets
 });
 
-loadHistory();
-alert("Partido guardado y agregado al historial");
+alert("Guardado");
+
+await loadHistory();
+
+}catch(error){
+
+console.error("ERROR GUARDAR:",error);
+
 }
 
+}
 function points(a,b,ra,rb){
 if(a==ra && b==rb) return 3;
 let d=Math.abs(a-ra)+Math.abs(b-rb);
@@ -215,20 +229,34 @@ let o=Object.entries(s).sort((a,b)=>b[1]-a[1]);
 rank.innerHTML=o.map((x,i)=>`<tr><td>${i==0?"🥇":i==1?"🥈":i==2?"🥉":i+1}</td><td>${x[0]}</td><td>${x[1]}</td></tr>`).join("");
 }
 async function loadHistory(){
+
+try{
+
 const snapshot = await getDocs(collection(db,"partidos"));
-let data = [];
-snapshot.forEach(doc=>{
-  data.push(doc.data());
+
+let data=[];
+
+snapshot.forEach(d=>{
+data.push(d.data());
 });
+
 document.getElementById("history").innerHTML=data.map(m=>`
 <div class="card">
 <h3>${m.partido}</h3>
 📅 ${m.fecha}<br>
 🌎 ${m.sede}<br>
 🏟️ ${m.estadio}<br>
-⚽ Resultado: ${m.ra}-${m.rb}<hr>
-${players.map(j=>m.bets[j].no?`<b>${j}:</b> No apostó`:`<b>${j}:</b> ${m.bets[j].a}-${m.bets[j].b}`).join("<br>")}
+⚽ Resultado: ${m.ra}-${m.rb}
 </div>`).join("");
+
+console.log("Partidos cargados:",data.length);
+
+}catch(error){
+
+console.error("ERROR LOADHISTORY:",error);
+
+}
+
 }
 
 async function borrarHistorial(){
