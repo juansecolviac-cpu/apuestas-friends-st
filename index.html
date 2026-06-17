@@ -334,7 +334,10 @@ let html="";
 
 snapshot.forEach(doc=>{
 
-let m = doc.data();
+let m = {
+id: doc.id,
+...doc.data()
+};
 
 html += `
 <div class="card apuesta-card">
@@ -412,7 +415,9 @@ card.style.display="none";
 
 }
 
-  async function borrarPartido(id){
+async function borrarPartido(id){
+
+console.log("ID RECIBIDO:", id);
 
 if(!confirm("¿Eliminar este partido?")) return;
 
@@ -420,6 +425,7 @@ await deleteDoc(doc(db,"partidos",id));
 
 await loadHistory();
 await cargarApuestas();
+await calc();
 
 alert("Partido eliminado");
 
