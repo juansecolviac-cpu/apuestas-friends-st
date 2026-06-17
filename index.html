@@ -417,11 +417,13 @@ card.style.display="none";
 
 async function borrarPartido(id){
 
-console.log("ID RECIBIDO:", id);
+alert("ID RECIBIDO: " + id);
 
 if(!confirm("¿Eliminar este partido?")) return;
 
 await deleteDoc(doc(db,"partidos",id));
+
+alert("SE EJECUTÓ DELETE");
 
 await loadHistory();
 await cargarApuestas();
