@@ -285,6 +285,18 @@ id:d.id,
 });
 });
 
+  data.sort((a,b)=>{
+
+let fa = a.fecha.split("/");
+let fb = b.fecha.split("/");
+
+let da = new Date(fa[2],fa[1]-1,fa[0]);
+let db = new Date(fb[2],fb[1]-1,fb[0]);
+
+return db - da;
+
+});
+
 document.getElementById("history").innerHTML=data.map(m=>`
 <div class="card partido-card">
 <h3>${m.partido}</h3>
@@ -330,14 +342,30 @@ alert('Historial eliminado');
 
 const snapshot = await getDocs(collection(db,"partidos"));
 
-let html="";
+let data=[];
 
 snapshot.forEach(doc=>{
-
-let m = {
-id: doc.id,
+data.push({
+id:doc.id,
 ...doc.data()
-};
+});
+});
+
+data.sort((a,b)=>{
+
+let fa = a.fecha.split("/");
+let fb = b.fecha.split("/");
+
+let da = new Date(fa[2],fa[1]-1,fa[0]);
+let db = new Date(fb[2],fb[1]-1,fb[0]);
+
+return db - da;
+
+});
+
+let html="";
+
+data.forEach(m=>{
 
 html += `
 <div class="card apuesta-card">
