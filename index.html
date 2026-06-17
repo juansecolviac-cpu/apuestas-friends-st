@@ -143,6 +143,7 @@ estadios.forEach(e=>estadio.innerHTML+=`<option>${e}</option>`);
 function login(){
 let u=document.getElementById('u').value.toLowerCase();
 let p=document.getElementById('p').value;
+
 if(users[u]===p){
 loginBox.classList.add('hidden');
 app.classList.remove('hidden');
@@ -157,11 +158,12 @@ buildInputs();
 loadHistory();
 cargarApuestas();
 
-}else alert("Datos incorrectos");
+}else{
+alert("Datos incorrectos");
+}
+}
 
-  }
-  
-  window.login = login;
+window.login = login;
 
 function showTab(id){
 ["inicio","partidos","apuestas","tabla"]
