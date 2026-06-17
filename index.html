@@ -218,12 +218,12 @@ let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0,Karda:20,Felipe:20};
 
 data.forEach(m=>{
   players.forEach(j=>{
-    if(!m.bets[j].no){
+    if(m.bets[j] && !m.bets[j].no){
       s[j]+=points(m.bets[j].a,m.bets[j].b,m.ra,m.rb);
     }
   });
 });
-
+  
 console.log("PUNTOS:", s);
 
 let o=Object.entries(s).sort((a,b)=>b[1]-a[1]);
