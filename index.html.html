@@ -1,0 +1,204 @@
+
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apuestas Friends ST Mundial 2026 Definitiva</title>
+<style>
+body{margin:0;font-family:Segoe UI,sans-serif;color:#fff;background:linear-gradient(135deg,#041c32,#064663,#0b8793)}
+header{text-align:center;padding:35px;background:rgba(0,0,0,.25)}
+.container{max-width:1300px;margin:auto;padding:15px}
+.card{background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border-radius:18px;padding:20px;margin:15px}
+.hidden{display:none} nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+input,select,button{padding:8px;border-radius:8px;border:none;margin:3px}
+button{cursor:pointer}.primary{background:#2563eb;color:#fff}
+table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid rgba(255,255,255,.2);text-align:center}
+.side{position:fixed;top:0;bottom:0;width:40px;font-size:24px;display:flex;flex-direction:column;justify-content:space-around}
+.l{left:3px}.r{right:3px}.vs{font-size:28px;color:gold;font-weight:bold}
+h2{color:#ffd700}
+</style></head><body>
+<div class="side l">🇲🇽🇺🇸🇨🇦🏆⚽🐺🇲🇽🇺🇸🇨🇦</div>
+<div class="side r">🇨🇦🇺🇸🇲🇽🐺⚽🏆🇨🇦🇺🇸🇲🇽</div>
+
+<header>
+<h1>🏆 FIFA WORLD CUP 2026 - FRIENDS ST 🏆</h1>
+<p>🇲🇽 México • 🇺🇸 Estados Unidos • 🇨🇦 Canadá</p>
+</header>
+
+<div id="loginBox" class="container">
+<div class="card">
+<h2>Iniciar sesión</h2>
+<input id="u" placeholder="Usuario">
+<input id="p" type="password" placeholder="Contraseña">
+<button class="primary" onclick="login()">Entrar</button>
+</div></div>
+
+<div id="app" class="container hidden">
+<nav>
+<button class="primary" onclick="showTab('inicio')">Inicio</button>
+<button class="primary" onclick="showTab('partidos')">Partidos</button>
+<button class="primary" onclick="showTab('tabla')">Tabla</button>
+</nav>
+
+<div id="inicio" class="card">
+<h2>Bienvenidos</h2>
+<p>Aplicación oficial de apuestas Friends ST Mundial 2026.</p>
+</div>
+
+<div id="partidos" class="card hidden">
+<div id="adminPanel" class="hidden">
+<h2>Agregar Partido</h2>
+
+<select id="paisA"></select>
+<span class="vs">VS</span>
+<select id="paisB"></select><br><br>
+
+Fecha:
+<input id="dd" placeholder="DD" style="width:55px">
+<input id="mm" placeholder="MM" style="width:55px">
+<input id="aa" placeholder="AAAA" style="width:75px"><br><br>
+
+<select id="paisSede">
+<option>México</option><option>Estados Unidos</option><option>Canadá</option>
+</select>
+
+<select id="estadio"></select><br><br>
+
+Resultado:
+<input id="ra" type="number" style="width:60px">-
+<input id="rb" type="number" style="width:60px"><br><br>
+
+<div id="inputs"></div>
+<button class="primary" onclick="saveMatch()">Guardar Partido</button>
+</div>
+
+<h2>📜 Historial Completo</h2><button class="primary" id="btnBorrar" style="display:none" onclick="borrarHistorial()">🗑️ Borrar Historial</button>
+<div id="history"></div>
+</div>
+
+<div id="tabla" class="card hidden">
+<h2>Clasificación</h2>
+<button class="primary" onclick="calc()">Actualizar</button>
+<table>
+<thead><tr><th>Pos</th><th>Jugador</th><th>Puntos</th></tr></thead>
+<tbody id="rank"></tbody>
+</table>
+</div>
+</div>
+
+<script>
+const users={tatan18:"admin2011",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111"};
+const players=["Simon","Junior","David","Tatan","Santiago"];
+
+const paises=[
+"Argentina","Argelia","Australia","Austria","Bélgica","Bosnia y Herzegovina","Brasil",
+"Cabo Verde","Canadá","Chile","Colombia","Corea del Sur","Croacia","Curazao","Dinamarca",
+"Ecuador","Egipto","España","Estados Unidos","Francia","Alemania","Ghana","Haití","Inglaterra",
+"Irak","Irán","Italia","Japón","Jordania","Marruecos","México","Nigeria","Noruega","Nueva Zelanda",
+"Países Bajos","Panamá","Paraguay","Perú","Portugal","Qatar","RD Congo","Arabia Saudita",
+"Escocia","Senegal","Serbia","Sudáfrica","Suecia","Suiza","Túnez","Turquía","Uruguay","Uzbekistán"
+];
+
+const estadios=[
+"Estadio Azteca - Ciudad de México","Estadio BBVA - Monterrey","Estadio Akron - Guadalajara",
+"MetLife Stadium","SoFi Stadium","AT&T Stadium","NRG Stadium","Mercedes-Benz Stadium",
+"Lincoln Financial Field","Lumen Field","Levi's Stadium","Hard Rock Stadium",
+"BMO Field","BC Place","Gillette Stadium","Arrowhead Stadium"
+];
+
+window.onload=()=>{
+paises.forEach(p=>{
+paisA.innerHTML+=`<option>${p}</option>`;
+paisB.innerHTML+=`<option>${p}</option>`;
+});
+estadios.forEach(e=>estadio.innerHTML+=`<option>${e}</option>`);
+};
+
+function login(){
+let u=document.getElementById('u').value.toLowerCase();
+let p=document.getElementById('p').value;
+if(users[u]===p){
+loginBox.classList.add('hidden');
+app.classList.remove('hidden');
+if(u==="tatan18"){ adminPanel.classList.remove('hidden'); var b=document.getElementById('btnBorrar'); if(b) b.style.display='inline-block'; }
+buildInputs();loadHistory();
+}else alert("Datos incorrectos");
+}
+
+function showTab(id){
+["inicio","partidos","tabla"].forEach(x=>document.getElementById(x).classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
+}
+
+function buildInputs(){
+let h="";
+players.forEach(j=>{
+h+=`<div><b>${j}</b>
+<select id="${j}no"><option value="0">Apostó</option><option value="1">No apostó</option></select>
+<input id="${j}a" type="number" style="width:60px">-
+<input id="${j}b" type="number" style="width:60px"></div>`;
+});
+inputs.innerHTML=h;
+}
+
+function saveMatch(){
+let data=JSON.parse(localStorage.getItem("friendsST_def")||"[]");
+let bets={};
+players.forEach(j=>{
+bets[j]={no:document.getElementById(j+"no").value==="1",
+a:document.getElementById(j+"a").value,b:document.getElementById(j+"b").value};
+});
+
+data.push({
+partido:paisA.value+" VS "+paisB.value,
+fecha:dd.value+"/"+mm.value+"/"+aa.value,
+sede:paisSede.value,
+estadio:estadio.value,
+ra:+ra.value,rb:+rb.value,bets:bets
+});
+
+localStorage.setItem("friendsST_def",JSON.stringify(data));
+loadHistory();
+alert("Partido guardado y agregado al historial");
+}
+
+function points(a,b,ra,rb){
+if(a==ra && b==rb) return 3;
+let d=Math.abs(a-ra)+Math.abs(b-rb);
+if(d===1) return 2;
+return 1;
+}
+
+function calc(){
+let data=JSON.parse(localStorage.getItem("friendsST_def")||"[]");
+let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0};
+data.forEach(m=>{
+players.forEach(j=>{
+if(!m.bets[j].no) s[j]+=points(m.bets[j].a,m.bets[j].b,m.ra,m.rb);
+});
+});
+let o=Object.entries(s).sort((a,b)=>b[1]-a[1]);
+rank.innerHTML=o.map((x,i)=>`<tr><td>${i==0?"🥇":i==1?"🥈":i==2?"🥉":i+1}</td><td>${x[0]}</td><td>${x[1]}</td></tr>`).join("");
+}
+
+function loadHistory(){
+let data=JSON.parse(localStorage.getItem("friendsST_def")||"[]");
+document.getElementById("history").innerHTML=data.map(m=>`
+<div class="card">
+<h3>${m.partido}</h3>
+📅 ${m.fecha}<br>
+🌎 ${m.sede}<br>
+🏟️ ${m.estadio}<br>
+⚽ Resultado: ${m.ra}-${m.rb}<hr>
+${players.map(j=>m.bets[j].no?`<b>${j}:</b> No apostó`:`<b>${j}:</b> ${m.bets[j].a}-${m.bets[j].b}`).join("<br>")}
+</div>`).join("");
+}
+
+function borrarHistorial(){
+if(confirm('¿Seguro que deseas borrar todo el historial?')){
+localStorage.removeItem('friendsST_def');
+document.getElementById('history').innerHTML='';
+if(document.getElementById('rank')) document.getElementById('rank').innerHTML='';
+alert('Historial eliminado');
+}
+}
+
+</script></body></html>
