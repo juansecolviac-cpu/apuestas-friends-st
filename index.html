@@ -67,16 +67,16 @@ Resultado:
 <input id="rb" type="number" style="width:60px"><br><br>
 
 <div id="inputs"></div>
-<button class="primary" onclick="saveMatch()">Guardar Partido</button>
+<button class="primary" id="btnGuardar">Guardar Partido</button>
 </div>
 
-<h2>📜 Historial Completo</h2><button class="primary" id="btnBorrar" style="display:none" onclick="borrarHistorial()">🗑️ Borrar Historial</button>
+<h2>📜 Historial Completo</h2><button <button class="primary" id="btnBorrar" style="display:none">🗑️ Borrar Historial</button>
 <div id="history"></div>
 </div>
 
 <div id="tabla" class="card hidden">
 <h2>Clasificación</h2>
-<button class="primary" onclick="calc()">Actualizar</button>
+<button class="primary" id="btnCalc">Actualizar</button>
 <table>
 <thead><tr><th>Pos</th><th>Jugador</th><th>Puntos</th></tr></thead>
 <tbody id="rank"></tbody>
@@ -84,7 +84,7 @@ Resultado:
 </div>
 </div>
 
-<script type="module">
+<script>
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import {
 getFirestore,
@@ -190,8 +190,12 @@ if(d===1) return 2;
 return 1;
 }
 
-function calc(){
-let data=JSON.parse(localStorage.getItem("friendsST_def")||"[]");
+async function calc(){
+const snapshot = await getDocs(collection(db,"partidos"));
+let data = [];
+snapshot.forEach(doc=>{
+  data.push(doc.data());
+});
 let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0};
 data.forEach(m=>{
 players.forEach(j=>{
@@ -247,5 +251,8 @@ window.saveMatch = saveMatch;
 window.calc = calc;
 window.borrarHistorial = borrarHistorial;
 
+  document.getElementById("btnGuardar").addEventListener("click", saveMatch);
+document.getElementById("btnCalc").addEventListener("click", calc);
+document.getElementById("btnBorrar").addEventListener("click", borrarHistorial);
 
 </script></body></html>
