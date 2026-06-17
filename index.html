@@ -35,6 +35,7 @@ h2{color:#ffd700}
 <nav>
 <button class="primary" onclick="showTab('inicio')">Inicio</button>
 <button class="primary" onclick="showTab('partidos')">Partidos</button>
+<button class="primary" onclick="showTab('apuestas')">Apuestas</button>
 <button class="primary" onclick="showTab('tabla')">Tabla</button>
 </nav>
 
@@ -75,6 +76,11 @@ Resultado:
 <div id="history"></div>
 </div>
 
+  <div id="apuestas" class="card hidden">
+<h2>📋 Comparativo de Apuestas</h2>
+<div id="tablaApuestas"></div>
+</div>
+  
 <div id="tabla" class="card hidden">
 <h2>Clasificación</h2>
 <button class="primary" onclick="calc()">Actualizar</button>
@@ -140,14 +146,24 @@ let p=document.getElementById('p').value;
 if(users[u]===p){
 loginBox.classList.add('hidden');
 app.classList.remove('hidden');
-if(u==="tatan18"){ adminPanel.classList.remove('hidden'); var b=document.getElementById('btnBorrar'); if(b) b.style.display='inline-block'; }
-buildInputs();loadHistory();
-}else alert("Datos incorrectos");
+
+if(u==="tatan18"){
+adminPanel.classList.remove('hidden');
+var b=document.getElementById('btnBorrar');
+if(b) b.style.display='inline-block';
 }
+
+buildInputs();
+loadHistory();
+cargarApuestas();
+
+}else alert("Datos incorrectos");
   window.login = login;
 
 function showTab(id){
-["inicio","partidos","tabla"].forEach(x=>document.getElementById(x).classList.add("hidden"));
+["inicio","partidos","apuestas","tabla"]
+.forEach(x=>document.getElementById(x).classList.add("hidden"));
+
 document.getElementById(id).classList.remove("hidden");
 }
   window.showTab = showTab;
@@ -190,6 +206,7 @@ bets:bets
 alert("Guardado");
 
 await loadHistory();
+await cargarApuestas();
 
 }catch(error){
 
@@ -281,6 +298,54 @@ alert('Historial eliminado');
 }
 
   }
+
+  async function cargarApuestas(){
+
+const snapshot = await getDocs(collection(db,"partidos"));
+
+let html="";
+
+snapshot.forEach(doc=>{
+
+let m = doc.data();
+
+html += `
+<div class="card">
+<h3>${m.partido}</h3>
+
+<table>
+<tr>
+<th>Jugador</th>
+<th>Apuesta</th>
+</tr>
+`;
+
+players.forEach(j=>{
+
+let b = m.bets[j];
+
+html += `
+<tr>
+<td>${j}</td>
+<td>${b.no ? "No apostó" : b.a + " - " + b.b}</td>
+</tr>
+`;
+
+});
+
+html += `
+</table>
+
+<p><b>Resultado:</b> ${m.ra}-${m.rb}</p>
+
+</div>
+`;
+
+});
+
+document.getElementById("tablaApuestas").innerHTML = html;
+
+}
   
   window.login = login;
 window.showTab = showTab;
