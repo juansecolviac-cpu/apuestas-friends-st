@@ -84,7 +84,28 @@ Resultado:
 </div>
 </div>
 
-<script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+doc
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyALXi231YbhRSWSyiH7-nWT8V1hh9QeQ5I",
+authDomain: "apuestas-friends-st.firebaseapp.com",
+projectId: "apuestas-friends-st",
+storageBucket: "apuestas-friends-st.firebasestorage.app",
+messagingSenderId: "805704838263",
+appId: "1:805704838263:web:15e37a55c8b428442daa72"
+};
+
+const appFirebase = initializeApp(firebaseConfig);
+const db = getFirestore(appFirebase);
 const users={tatan18:"admin2011",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111"};
 const players=["Simon","Junior","David","Tatan","Santiago"];
 
@@ -139,23 +160,23 @@ h+=`<div><b>${j}</b>
 inputs.innerHTML=h;
 }
 
-function saveMatch(){
-let data=JSON.parse(localStorage.getItem("friendsST_def")||"[]");
+async function saveMatch(){
 let bets={};
 players.forEach(j=>{
 bets[j]={no:document.getElementById(j+"no").value==="1",
 a:document.getElementById(j+"a").value,b:document.getElementById(j+"b").value};
 });
 
-data.push({
+await addDoc(collection(db,"partidos"),{
 partido:paisA.value+" VS "+paisB.value,
 fecha:dd.value+"/"+mm.value+"/"+aa.value,
 sede:paisSede.value,
 estadio:estadio.value,
-ra:+ra.value,rb:+rb.value,bets:bets
+ra:+ra.value,
+rb:+rb.value,
+bets:bets
 });
 
-localStorage.setItem("friendsST_def",JSON.stringify(data));
 loadHistory();
 alert("Partido guardado y agregado al historial");
 }
@@ -179,8 +200,12 @@ let o=Object.entries(s).sort((a,b)=>b[1]-a[1]);
 rank.innerHTML=o.map((x,i)=>`<tr><td>${i==0?"🥇":i==1?"🥈":i==2?"🥉":i+1}</td><td>${x[0]}</td><td>${x[1]}</td></tr>`).join("");
 }
 
-function loadHistory(){
-let data=JSON.parse(localStorage.getItem("friendsST_def")||"[]");
+async function loadHistory(){
+const snapshot = await getDocs(collection(db,"partidos"));
+let data = [];
+snapshot.forEach(doc=>{
+  data.push(doc.data());
+});
 document.getElementById("history").innerHTML=data.map(m=>`
 <div class="card">
 <h3>${m.partido}</h3>
@@ -192,12 +217,26 @@ ${players.map(j=>m.bets[j].no?`<b>${j}:</b> No apostó`:`<b>${j}:</b> ${m.bets[j
 </div>`).join("");
 }
 
-function borrarHistorial(){
+async function borrarHistorial(){
+
 if(confirm('¿Seguro que deseas borrar todo el historial?')){
-localStorage.removeItem('friendsST_def');
-document.getElementById('history').innerHTML='';
-if(document.getElementById('rank')) document.getElementById('rank').innerHTML='';
+
+const snapshot = await getDocs(collection(db,"partidos"));
+
+for(const d of snapshot.docs){
+  await deleteDoc(doc(db,"partidos",d.id));
+}
+
+document.getElementById("history").innerHTML='';
+
+if(document.getElementById('rank')){
+  document.getElementById('rank').innerHTML='';
+}
+
 alert('Historial eliminado');
+
+}
+
 }
 }
 
