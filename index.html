@@ -485,7 +485,7 @@ let mejorPuntaje = -1;
 players.forEach(j=>{
   let b = m.bets[j];
 
-  if(!b.no){
+  if(b && !b.no){
     let pts = points(b.a,b.b,m.ra,m.rb);
 
     if(pts > mejorPuntaje){
