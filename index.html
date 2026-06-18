@@ -518,6 +518,14 @@ players.forEach(j=>{
 
 let b = m.bets[j];
 
+if(b && !b.no){
+b = {
+no:true,
+a:0,
+b:0
+};
+}
+
 html += `
 <tr>
 <td>${j}</td>
@@ -526,7 +534,6 @@ html += `
 `;
 
 });
-
 html += `
 </table>
 
