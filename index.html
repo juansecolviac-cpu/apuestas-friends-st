@@ -134,6 +134,7 @@ const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase);
 const users={tatan18:"admin2011",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",karda:"1111",felipe:"1111"};
 const players=["Simon","Junior","David","Tatan","Santiago","Karda","Felipe"];
+  let esAdmin = false;
 
 const paises=[
 "Argentina","Argelia","Australia","Austria","Bélgica","Bosnia y Herzegovina","Brasil",
@@ -168,6 +169,7 @@ loginBox.classList.add('hidden');
 app.classList.remove('hidden');
 
 if(u==="tatan18"){
+esAdmin = true;
 adminPanel.classList.remove('hidden');
 var b=document.getElementById('btnBorrar');
 if(b) b.style.display='inline-block';
@@ -328,8 +330,6 @@ partido:x.partido,
 fecha:x.fecha
 }))
 );
-
-alert("PRUEBA");
   
 document.getElementById("history").innerHTML=data.map(m=>`
 <div class="card partido-card">
@@ -444,11 +444,13 @@ html += `
 <div class="card apuesta-card">
 <h3>${m.partido}</h3>
 
+${esAdmin ? `
 <button
 class="primary"
 onclick="borrarPartido('${m.id}')">
 🗑️ Eliminar Partido
 </button><br><br>
+` : ""}
 
 <table>
 <tr>
@@ -518,6 +520,11 @@ card.style.display="none";
 }
 
 async function borrarPartido(id){
+
+  if(!esAdmin){
+alert("Solo el administrador puede eliminar partidos");
+return;
+}
 
 alert("ID RECIBIDO: " + id);
 
