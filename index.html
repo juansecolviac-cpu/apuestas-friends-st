@@ -518,7 +518,7 @@ players.forEach(j=>{
 
 let b = m.bets[j];
 
-if(b && !b.no){
+if(!b){
 b = {
 no:true,
 a:0,
@@ -534,6 +534,7 @@ html += `
 `;
 
 });
+  
 html += `
 </table>
 
