@@ -37,6 +37,7 @@ h2{color:#ffd700}
 <button class="primary" onclick="showTab('partidos')">Partidos</button>
 <button class="primary" onclick="showTab('apuestas')">Apuestas</button>
 <button class="primary" onclick="showTab('tabla')">Tabla</button>
+  <button class="primary" onclick="showTab('estadisticas')">Estadísticas</button>
 </nav>
 
 <div id="inicio" class="card">
@@ -117,6 +118,24 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 </div>
 </div>
 
+  <div id="estadisticas" class="card hidden">
+<h2>📊 Estadísticas de Jugadores</h2>
+
+<table>
+<thead>
+<tr>
+<th>Jugador</th>
+<th>Partidos Apostados</th>
+<th>Aciertos Exactos</th>
+<th>Puntos Totales</th>
+</tr>
+</thead>
+
+<tbody id="stats"></tbody>
+
+</table>
+</div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import {
@@ -186,6 +205,7 @@ buildInputs();
 loadHistory();
 cargarApuestas();
 actualizarInicio();
+cargarEstadisticas();
 
 }else{
 alert("Datos incorrectos");
@@ -195,7 +215,7 @@ alert("Datos incorrectos");
 window.login = login;
 
 function showTab(id){
-["inicio","partidos","apuestas","tabla"]
+["inicio","partidos","apuestas","tabla","estadisticas"]
 .forEach(x=>document.getElementById(x).classList.add("hidden"));
 
 document.getElementById(id).classList.remove("hidden");
@@ -247,6 +267,7 @@ alert("Guardado");
 
 await loadHistory();
 await cargarApuestas();
+await cargarEstadisticas();
 
 }catch(error){
 
@@ -549,6 +570,7 @@ alert("SE EJECUTÓ DELETE");
 
 await loadHistory();
 await cargarApuestas();
+await cargarEstadisticas();
 await calc();
 
 alert("Partido eliminado");
@@ -605,6 +627,65 @@ document.getElementById("proximoPartido").innerHTML =
 
 }
     
+}
+
+  async function cargarEstadisticas(){
+
+const snapshot = await getDocs(collection(db,"partidos"));
+
+let data=[];
+
+snapshot.forEach(doc=>{
+data.push(doc.data());
+});
+
+let stats={};
+
+players.forEach(j=>{
+stats[j]={
+apostados:0,
+exactos:0,
+puntos:0
+};
+});
+
+data.forEach(m=>{
+
+players.forEach(j=>{
+
+let b = m.bets[j];
+
+if(!b || b.no) return;
+
+stats[j].apostados++;
+
+if(b.a == m.ra && b.b == m.rb){
+stats[j].exactos++;
+}
+
+stats[j].puntos += points(
+b.a,
+b.b,
+m.ra,
+m.rb
+);
+
+});
+
+});
+
+document.getElementById("stats").innerHTML =
+players.map(j=>`
+
+<tr>
+<td>${j}</td>
+<td>${stats[j].apostados}</td>
+<td>${stats[j].exactos}</td>
+<td>${stats[j].puntos}</td>
+</tr>
+
+`).join("");
+
 }
   
   window.login = login;
