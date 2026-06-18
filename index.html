@@ -49,7 +49,7 @@ h2{color:#ffd700}
 
 <p id="proximoPartido">📅 Próximo partido: --</p>
 
-</div>me 
+</div>
 
 <div id="partidos" class="card hidden">
 <div id="adminPanel" class="hidden">
@@ -567,6 +567,21 @@ data.push(doc.data());
 
 document.getElementById("contadorPartidos").innerHTML =
 "⚽ Partidos registrados: " + data.length;
+
+    let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0,Karda:20,Felipe:20};
+
+data.forEach(m=>{
+players.forEach(j=>{
+if(m.bets[j] && !m.bets[j].no){
+s[j]+=points(m.bets[j].a,m.bets[j].b,m.ra,m.rb);
+}
+});
+});
+
+let lider = Object.entries(s).sort((a,b)=>b[1]-a[1])[0];
+
+document.getElementById("liderActual").innerHTML =
+"🥇 Líder actual: " + lider[0] + " (" + lider[1] + " pts)";
 
 }
   
