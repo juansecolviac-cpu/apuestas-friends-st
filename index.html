@@ -42,7 +42,14 @@ h2{color:#ffd700}
 <div id="inicio" class="card">
 <h2>Bienvenidos</h2>
 <p>Aplicación oficial de apuestas Friends ST Mundial 2026.</p>
-</div>
+
+<p id="contadorPartidos">⚽ Partidos registrados: 0</p>
+
+<p id="liderActual">🥇 Líder actual: --</p>
+
+<p id="proximoPartido">📅 Próximo partido: --</p>
+
+</div>me 
 
 <div id="partidos" class="card hidden">
 <div id="adminPanel" class="hidden">
@@ -178,6 +185,7 @@ if(b) b.style.display='inline-block';
 buildInputs();
 loadHistory();
 cargarApuestas();
+actualizarInicio();
 
 }else{
 alert("Datos incorrectos");
@@ -207,6 +215,11 @@ inputs.innerHTML=h;
 }
 
 async function saveMatch(){
+
+  if(paisA.value === paisB.value){
+  alert("Los países no pueden ser iguales");
+  return;
+}
 
 try{
 
@@ -539,6 +552,21 @@ await cargarApuestas();
 await calc();
 
 alert("Partido eliminado");
+
+}
+
+  async function actualizarInicio(){
+
+const snapshot = await getDocs(collection(db,"partidos"));
+
+let data=[];
+
+snapshot.forEach(doc=>{
+data.push(doc.data());
+});
+
+document.getElementById("contadorPartidos").innerHTML =
+"⚽ Partidos registrados: " + data.length;
 
 }
   
