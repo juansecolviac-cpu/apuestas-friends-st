@@ -41,15 +41,35 @@ h2{color:#ffd700}
 </nav>
 
 <div id="inicio" class="card">
+
+<div style="float:right;background:rgba(255,255,255,.1);padding:12px;border-radius:10px;min-width:220px">
+
+<h3>👤 Usuario</h3>
+
+<div id="infoUsuario">
+Cargando...
+</div>
+
+<hr>
+
+<h3>👥 Participantes</h3>
+
+<div id="listaUsuarios">
+Cargando...
+</div>
+
+</div>
+
 <h2>Bienvenidos</h2>
+
 <p>Aplicación oficial de apuestas Friends ST Mundial 2026.</p>
 
-<p id="contadorPartidos">⚽ Partidos registrados: 0</p>
+<p id="contadorPartidos">⚽ Partidos registrados: --</p>
 
 <p id="liderActual">🥇 Líder actual: --</p>
 
 </div>
-
+  
 <div id="partidos" class="card hidden">
 <div id="adminPanel" class="hidden">
 <h2>Agregar Partido</h2>
@@ -158,7 +178,8 @@ const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase);
 const users={tatan18:"admin2011",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",karda:"1111",felipe:"1111"};
 const players=["Simon","Junior","David","Tatan","Santiago","Karda","Felipe"];
-  let esAdmin = false;
+  let usuarioActual = "";
+let esAdmin = false;
 
 const paises=[
 "Argentina","Argelia","Australia","Austria","Bélgica","Bosnia y Herzegovina","Brasil",
@@ -186,6 +207,7 @@ estadios.forEach(e=>estadio.innerHTML+=`<option>${e}</option>`);
 
 function login(){
 let u=document.getElementById('u').value.toLowerCase();
+  usuarioActual = u;
 let p=document.getElementById('p').value;
 
 if(users[u]===p){
@@ -204,6 +226,7 @@ loadHistory();
 cargarApuestas();
 actualizarInicio();
 cargarEstadisticas();
+  actualizarUsuarios();
 
 }else{
 alert("Datos incorrectos");
@@ -603,6 +626,31 @@ let lider = Object.entries(s).sort((a,b)=>b[1]-a[1])[0];
 document.getElementById("liderActual").innerHTML =
 "🥇 Líder actual: " + lider[0] + " (" + lider[1] + " pts)";
     
+}
+
+  function actualizarUsuarios(){
+
+document.getElementById("infoUsuario").innerHTML =
+usuarioActual +
+"<br>" +
+(esAdmin ? "🔑 Administrador" : "👤 Usuario");
+
+let html = "";
+
+Object.keys(users).forEach(u=>{
+
+html +=
+"🟢 " +
+u +
+" - " +
+(u==="tatan18" ? "Administrador" : "Usuario")
++
+"<br>";
+
+});
+
+document.getElementById("listaUsuarios").innerHTML = html;
+
 }
 
   async function cargarEstadisticas(){
