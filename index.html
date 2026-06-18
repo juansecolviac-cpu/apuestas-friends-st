@@ -48,8 +48,6 @@ h2{color:#ffd700}
 
 <p id="liderActual">🥇 Líder actual: --</p>
 
-<p id="proximoPartido">📅 Próximo partido: --</p>
-
 </div>
 
 <div id="partidos" class="card hidden">
@@ -604,28 +602,6 @@ let lider = Object.entries(s).sort((a,b)=>b[1]-a[1])[0];
 
 document.getElementById("liderActual").innerHTML =
 "🥇 Líder actual: " + lider[0] + " (" + lider[1] + " pts)";
-
-let proximos = data.filter(m =>
-m.ra === 0 &&
-m.rb === 0
-);
-
-if(proximos.length > 0){
-
-let p = proximos[0];
-
-document.getElementById("proximoPartido").innerHTML =
-"📅 Próximo partido: " +
-p.partido +
-" - " +
-p.fecha;
-
-}else{
-
-document.getElementById("proximoPartido").innerHTML =
-"📅 Próximo partido: Ninguno";
-
-}
     
 }
 
