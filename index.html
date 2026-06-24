@@ -26,42 +26,49 @@ margin-bottom:20px;
 }
 
 .bracket{
-display:flex;
-justify-content:center;
-align-items:flex-start;
-gap:50px;
-padding:30px;
-overflow-x:auto;
+display:grid;
+grid-template-columns: 1fr 1fr;
+gap:80px;
+padding:20px;
 }
   
+.lado{
+display:flex;
+gap:40px;
+align-items:flex-start;
+}
+
 .round{
 display:flex;
 flex-direction:column;
 gap:15px;
-width:180px;
+min-width:180px;
 }
 
 .round h3{
 text-align:center;
 color:gold;
-margin-bottom:10px;
 }
 
 .round input{
-padding:12px;
+padding:10px;
+border-radius:8px;
 border:none;
-border-radius:10px;
 background:rgba(255,255,255,.15);
 color:white;
-font-size:15px;
 }
 
-  .linea{
-width:2px;
+.lineas{
+display:flex;
+flex-direction:column;
+justify-content:space-around;
+height:600px;
+}
+
+.linea{
+width:40px;
+height:2px;
 background:white;
-height:120px;
-opacity:.4;
-margin:auto;
 }
   
 </style></head><body>
@@ -219,23 +226,27 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
 <div class="bracket">
 
+<!-- IZQUIERDA -->
+<div class="lado">
+
 <div class="round">
 <h3>16avos</h3>
-<input placeholder="Equipo 1">
-<input placeholder="Equipo 2">
-<div class="linea"></div>
-  
-<input placeholder="Equipo 3">
-<input placeholder="Equipo 4">
-<div class="linea"></div>
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+</div>
 
-<input placeholder="Equipo 5">
-<input placeholder="Equipo 6">
+<div class="lineas">
 <div class="linea"></div>
-
-<input placeholder="Equipo 7">
-<input placeholder="Equipo 8">
 <div class="linea"></div>
+<div class="linea"></div>
+<div class="linea"></div>
+</div>
 
 <div class="round">
 <h3>Octavos</h3>
@@ -245,68 +256,73 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <input placeholder="Clasificado">
 </div>
 
+<div class="lineas">
+<div class="linea"></div>
+<div class="linea"></div>
+</div>
+
 <div class="round">
 <h3>Cuartos</h3>
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
 </div>
 
+</div>
+
+<!-- DERECHA -->
+<div class="lado">
+
 <div class="round">
-<h3>Semifinal</h3>
+<h3>Cuartos</h3>
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+</div>
+
+<div class="lineas">
+<div class="linea"></div>
+<div class="linea"></div>
+</div>
+
+<div class="round">
+<h3>Octavos</h3>
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+</div>
+
+<div class="lineas">
+<div class="linea"></div>
+<div class="linea"></div>
+<div class="linea"></div>
+<div class="linea"></div>
+</div>
+
+<div class="round">
+<h3>16avos</h3>
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+<input placeholder="Equipo">
+</div>
+
+</div>
+
+</div>
+
+  <div class="centro">
+
+<h3>🏆 FINAL 🏆</h3>
+
 <input placeholder="Finalista 1">
+
 <input placeholder="Finalista 2">
-</div>
 
-<div class="round">
-<h3>Final</h3>
-<input placeholder="Campeón">
-</div>
-
-  <div class="round separada">
-<h3>Semifinal</h3>
-<input placeholder="Finalista">
-</div>
-
-<div class="round separada">
-<h3>Cuartos</h3>
-<input placeholder="Clasificado">
-<br><br><br><br><br>
-<input placeholder="Clasificado">
-</div>
-
-<div class="round separada">
-<h3>Octavos</h3>
-<input placeholder="Ganador">
-<br><br><br><br>
-<input placeholder="Ganador">
-<br><br><br><br>
-<input placeholder="Ganador">
-<br><br><br><br>
-<input placeholder="Ganador">
-</div>
-
-<div class="round">
-<h3>16avos</h3>
-
-<input placeholder="Equipo 9">
-<input placeholder="Equipo 10">
-<div class="linea"></div>
-
-<input placeholder="Equipo 11">
-<input placeholder="Equipo 12">
-<div class="linea"></div>
-
-<input placeholder="Equipo 13">
-<input placeholder="Equipo 14">
-<div class="linea"></div>
-
-<input placeholder="Equipo 15">
-<input placeholder="Equipo 16">
-<div class="linea"></div>
-
-</div>
-
-</div>
+<input placeholder="CAMPEÓN">
 
 </div>
 
