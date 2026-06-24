@@ -25,58 +25,65 @@ font-size:18px;
 margin-bottom:20px;
 }
 
-.llave-horizontal{
+.llave{
 display:flex;
 justify-content:center;
 align-items:flex-start;
 gap:40px;
-padding:30px;
 overflow-x:auto;
+padding:30px;
 }
 
-.lado-izq,
-.lado-der{
-display:flex;
-gap:20px;
-}
-
-.columna{
+.ronda{
 display:flex;
 flex-direction:column;
-  align-content: center;
-gap:15px;
-min-width:170px;
 }
 
-.columna h3{
+.ronda h3{
 text-align:center;
 color:gold;
+margin-bottom:20px;
 }
 
-.columna input{
-padding:10px;
-border:none;
-border-radius:8px;
-background:rgba(255,255,255,.15);
-color:white;
+.partido{
+display:flex;
+flex-direction:column;
+gap:5px;
+margin-bottom:35px;
 }
 
-.centro-final{
+.partido input,
+.ronda input,
+.final input{
+width:140px;
+}
+
+.r8{
+margin-top:60px;
+}
+
+.r8 input{
+margin-bottom:70px;
+}
+
+.r4{
+margin-top:150px;
+}
+
+.r4 input{
+margin-bottom:170px;
+}
+
+.r2{
+margin-top:290px;
+}
+
+.final{
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:center;
-gap:15px;
-margin-top:120px;
-}
-
-.centro-final input{
-padding:12px;
-border:none;
-border-radius:8px;
-background:rgba(255,255,255,.15);
-color:white;
-text-align:center;
+margin-top:330px;
+gap:12px;
 }
 
 .campeon{
@@ -250,12 +257,9 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 ⚽ Camino hacia la Copa del Mundo 2026 ⚽
 </div>
 
-<div class="llave-horizontal">
+<div class="llave">
 
-<div class="lado-izq">
-
-<div class="columna">
-
+<div class="ronda r16">
 <h3>16avos</h3>
 
 <div class="partido">
@@ -300,99 +304,110 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
 </div>
 
-<div class="columna">
-
+<div class="ronda r8">
 <h3>Octavos</h3>
 
-<input class="octavos" placeholder="Ganador 1-2">
-<input class="octavos" placeholder="Ganador 3-4">
-
-<input class="octavos" placeholder="Ganador 5-6">
-<input class="octavos" placeholder="Ganador 7-8">
-
-<input class="octavos" placeholder="Ganador 9-10">
-<input class="octavos" placeholder="Ganador 11-12">
-
-<input class="octavos" placeholder="Ganador 13-14">
-<input class="octavos" placeholder="Ganador 15-16">
+<input placeholder="Ganador 1">
+<input placeholder="Ganador 2">
+<input placeholder="Ganador 3">
+<input placeholder="Ganador 4">
 
 </div>
 
-<div class="columna">
+<div class="ronda r4">
 <h3>Cuartos</h3>
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
+
+<input placeholder="Clasificado 1">
+<input placeholder="Clasificado 2">
+
 </div>
 
-<div class="columna">
+<div class="ronda r2">
 <h3>Semifinal</h3>
+
 <input placeholder="Finalista">
-<input placeholder="Finalista">
-</div>
 
 </div>
 
-<div class="centro-final">
+<div class="final">
 
 <h3>🏆 FINAL 🏆</h3>
 
-<input placeholder="Finalista 1">
-<input placeholder="Finalista 2">
+<input placeholder="Finalista Izq">
+<input placeholder="Finalista Der">
 
 <input class="campeon" placeholder="CAMPEÓN">
 
 </div>
 
-<div class="lado-der">
-
-<div class="columna">
+<div class="ronda r2">
 <h3>Semifinal</h3>
+
 <input placeholder="Finalista">
-<input placeholder="Finalista">
+
 </div>
 
-<div class="columna">
+<div class="ronda r4">
 <h3>Cuartos</h3>
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
+
+<input placeholder="Clasificado 1">
+<input placeholder="Clasificado 2">
+
 </div>
 
-<div class="columna">
+<div class="ronda r8">
 <h3>Octavos</h3>
 
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
-<input placeholder="Clasificado">
+<input placeholder="Ganador 1">
+<input placeholder="Ganador 2">
+<input placeholder="Ganador 3">
+<input placeholder="Ganador 4">
+
 </div>
 
-<div class="columna">
+<div class="ronda r16">
 <h3>16avos</h3>
 
+<div class="partido">
 <input placeholder="Equipo 17">
 <input placeholder="Equipo 18">
+</div>
+
+<div class="partido">
 <input placeholder="Equipo 19">
 <input placeholder="Equipo 20">
+</div>
+
+<div class="partido">
 <input placeholder="Equipo 21">
 <input placeholder="Equipo 22">
+</div>
+
+<div class="partido">
 <input placeholder="Equipo 23">
 <input placeholder="Equipo 24">
+</div>
+
+<div class="partido">
 <input placeholder="Equipo 25">
 <input placeholder="Equipo 26">
+</div>
+
+<div class="partido">
 <input placeholder="Equipo 27">
 <input placeholder="Equipo 28">
+</div>
+
+<div class="partido">
 <input placeholder="Equipo 29">
 <input placeholder="Equipo 30">
+</div>
+
+<div class="partido">
 <input placeholder="Equipo 31">
 <input placeholder="Equipo 32">
+</div>
+
 </div>
 
 </div>
