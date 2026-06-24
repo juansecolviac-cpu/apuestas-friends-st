@@ -14,6 +14,16 @@ table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px s
 .side{position:fixed;top:0;bottom:0;width:40px;font-size:24px;display:flex;flex-direction:column;justify-content:space-around}
 .l{left:3px}.r{right:3px}.vs{font-size:28px;color:gold;font-weight:bold}
 h2{color:#ffd700}
+  .banner-fases{
+background:linear-gradient(90deg,#ffd700,#ff9800);
+color:black;
+font-weight:bold;
+padding:15px;
+border-radius:15px;
+text-align:center;
+font-size:18px;
+margin-bottom:20px;
+}
 </style></head><body>
 <div class="side l">🇲🇽🇺🇸🇨🇦🏆⚽🐺🇲🇽🇺🇸🇨🇦</div>
 <div class="side r">🇨🇦🇺🇸🇲🇽🐺⚽🏆🇨🇦🇺🇸🇲🇽</div>
@@ -38,6 +48,7 @@ h2{color:#ffd700}
 <button class="primary" onclick="showTab('apuestas')">Apuestas</button>
 <button class="primary" onclick="showTab('tabla')">Tabla</button>
   <button class="primary" onclick="showTab('estadisticas')">Estadísticas</button>
+  <button class="primary" onclick="showTab('fases')">Fases Finales</button>
 </nav>
 
 <div id="inicio" class="card">
@@ -61,10 +72,6 @@ Cargando...
 </div>
 
 <h2>Bienvenidos</h2>
-
-<div class="banner-mini">
-🇨🇴 Iván Cepeda Presidente 2026-2030 (Ficticio)
-</div>
   
 <p>Aplicación oficial de apuestas Friends ST Mundial 2026.</p>
 
@@ -158,6 +165,16 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 </table>
 </div>
 
+  <div id="fases" class="card hidden">
+
+<h2>🏆 Fases Finales Mundial 2026</h2>
+
+    <div class="banner-fases">
+🏆 Camino hacia la Copa del Mundo 2026
+</div>
+
+</div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import {
@@ -240,7 +257,7 @@ alert("Datos incorrectos");
 window.login = login;
 
 function showTab(id){
-["inicio","partidos","apuestas","tabla","estadisticas"]
+["inicio","partidos","apuestas","tabla","estadisticas","fases"]
 .forEach(x=>document.getElementById(x).classList.add("hidden"));
 
 document.getElementById(id).classList.remove("hidden");
