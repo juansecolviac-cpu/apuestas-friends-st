@@ -22,11 +22,13 @@ gap:10px;
 margin-bottom:25px;
 }
 
-    .bracket{
+.bracket{
 display:flex;
-gap:30px;
+flex-direction:row;
+align-items:flex-start;
+gap:40px;
 overflow-x:auto;
-padding:20px 0;
+padding:20px;
 }
 
 .round{
@@ -212,45 +214,37 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 </table>
 </div>
 
-  <div id="fases" class="card hidden">
+<div id="fases" class="card hidden">
 
 <h2>🏆 Llave Mundial 2026</h2>
 
-<div class="banner-fases">
-🏆 Camino hacia la Copa del Mundo 2026
-</div>
-
 <div class="bracket">
 
-<div class="round">
+<div class="ronda">
 <h3>16avos</h3>
 
 <input placeholder="Equipo 1">
 <input placeholder="Equipo 2">
-
 <input placeholder="Equipo 3">
 <input placeholder="Equipo 4">
-
 <input placeholder="Equipo 5">
 <input placeholder="Equipo 6">
-
 <input placeholder="Equipo 7">
 <input placeholder="Equipo 8">
 
 </div>
 
-<div class="round">
+<div class="ronda">
 <h3>Octavos</h3>
 
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
-
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
 
 </div>
 
-<div class="round">
+<div class="ronda">
 <h3>Cuartos</h3>
 
 <input placeholder="Clasificado">
@@ -258,17 +252,17 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
 </div>
 
-<div class="round">
+<div class="ronda">
 <h3>Semifinal</h3>
 
 <input placeholder="Finalista">
+
 </div>
 
-<div class="round">
+<div class="ronda">
 <h3>Final</h3>
 
 <input placeholder="Campeón">
-</div>
 
 </div>
 
