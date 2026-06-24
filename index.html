@@ -25,88 +25,65 @@ font-size:18px;
 margin-bottom:20px;
 }
 
-.bracket{
-display:grid;
-grid-template-columns: 1fr 1fr;
-gap:80px;
-padding:20px;
-}
-  
-.lado{
-display:flex;
-gap:40px;
-align-items:flex-start;
-}
-
-.round{
-display:flex;
-flex-direction:column;
-gap:15px;
-min-width:180px;
-}
-
-.round h3{
-text-align:center;
-color:gold;
-}
-
-.round input{
-padding:10px;
-border-radius:8px;
-border:none;
-background:rgba(255,255,255,.15);
-color:white;
-}
-
-.lineas{
-display:flex;
-flex-direction:column;
-justify-content:space-around;
-height:600px;
-}
-
-.linea{
-width:40px;
-height:2px;
-background:white;
-}
-
 .llave{
 display:flex;
 justify-content:space-between;
-align-items:center;
-padding:30px;
+align-items:flex-start;
+gap:30px;
+padding:20px;
+overflow-x:auto;
 }
 
 .lado{
 display:flex;
-flex-direction:column;
-gap:15px;
+gap:20px;
+align-items:flex-start;
 }
 
-.equipo{
-background:rgba(255,255,255,.15);
-padding:12px;
-border-radius:10px;
-width:180px;
-text-align:center;
-}
-
-.centro{
+.columna{
 display:flex;
 flex-direction:column;
+gap:12px;
+min-width:160px;
+}
+
+.columna h3{
+color:gold;
+text-align:center;
+margin-bottom:10px;
+}
+
+.columna input{
+padding:10px;
+border:none;
+border-radius:8px;
+background:rgba(255,255,255,.15);
+color:white;
+font-size:14px;
+}
+
+.final-center{
+display:flex;
+flex-direction:column;
+justify-content:center;
 align-items:center;
-gap:20px;
+gap:15px;
+margin-top:120px;
+}
+
+.final-center input{
+padding:12px;
+border:none;
+border-radius:10px;
+background:rgba(255,255,255,.15);
+color:white;
+text-align:center;
 }
 
 .campeon{
-background:gold;
-color:black;
+background:gold !important;
+color:black !important;
 font-weight:bold;
-padding:15px;
-border-radius:10px;
-width:220px;
-text-align:center;
 }
   
 </style></head><body>
@@ -262,48 +239,92 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 ⚽ Camino hacia la Copa del Mundo 2026 ⚽
 </div>
 
-<div class="llave">
+<h2>🏆 Llave Mundial 2026</h2>
 
-<div class="lado">
+<div class="bracket">
 
-<div class="equipo">Equipo 1</div>
-<div class="equipo">Equipo 2</div>
+<div class="round">
+<h3>16avos</h3>
 
-<div class="equipo">Equipo 3</div>
-<div class="equipo">Equipo 4</div>
-
-<div class="equipo">Equipo 5</div>
-<div class="equipo">Equipo 6</div>
-
-<div class="equipo">Equipo 7</div>
-<div class="equipo">Equipo 8</div>
-
-</div>
-
-<div class="centro">
-
-<h3>🏆 FINAL 🏆</h3>
-
-<div class="equipo">Finalista 1</div>
-<div class="equipo">Finalista 2</div>
-
-<div class="campeon">CAMPEÓN</div>
+<input placeholder="Equipo 1">
+<input placeholder="Equipo 2">
+<input placeholder="Equipo 3">
+<input placeholder="Equipo 4">
+<input placeholder="Equipo 5">
+<input placeholder="Equipo 6">
+<input placeholder="Equipo 7">
+<input placeholder="Equipo 8">
 
 </div>
 
-<div class="lado">
+<div class="round">
+<h3>Octavos</h3>
 
-<div class="equipo">Equipo 9</div>
-<div class="equipo">Equipo 10</div>
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
 
-<div class="equipo">Equipo 11</div>
-<div class="equipo">Equipo 12</div>
+</div>
 
-<div class="equipo">Equipo 13</div>
-<div class="equipo">Equipo 14</div>
+<div class="round">
+<h3>Cuartos</h3>
 
-<div class="equipo">Equipo 15</div>
-<div class="equipo">Equipo 16</div>
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+
+</div>
+
+<div class="round">
+<h3>Semifinal</h3>
+
+<input placeholder="Finalista">
+
+</div>
+
+<div class="round">
+<h3>🏆 Final</h3>
+
+<input placeholder="Campeón">
+
+</div>
+
+<div class="round">
+<h3>Semifinal</h3>
+
+<input placeholder="Finalista">
+
+</div>
+
+<div class="round">
+<h3>Cuartos</h3>
+
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+
+</div>
+
+<div class="round">
+<h3>Octavos</h3>
+
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+
+</div>
+
+<div class="round">
+<h3>16avos</h3>
+
+<input placeholder="Equipo 9">
+<input placeholder="Equipo 10">
+<input placeholder="Equipo 11">
+<input placeholder="Equipo 12">
+<input placeholder="Equipo 13">
+<input placeholder="Equipo 14">
+<input placeholder="Equipo 15">
+<input placeholder="Equipo 16">
 
 </div>
 
