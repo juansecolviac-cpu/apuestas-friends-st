@@ -25,32 +25,31 @@ font-size:18px;
 margin-bottom:20px;
 }
 
-.llave{
+.llave-horizontal{
 display:flex;
-justify-content:space-between;
+justify-content:center;
 align-items:flex-start;
-gap:30px;
-padding:20px;
+gap:40px;
+padding:30px;
 overflow-x:auto;
 }
 
-.lado{
+.lado-izq,
+.lado-der{
 display:flex;
 gap:20px;
-align-items:flex-start;
 }
 
 .columna{
 display:flex;
 flex-direction:column;
-gap:12px;
-min-width:160px;
+gap:15px;
+min-width:170px;
 }
 
 .columna h3{
-color:gold;
 text-align:center;
-margin-bottom:10px;
+color:gold;
 }
 
 .columna input{
@@ -59,22 +58,21 @@ border:none;
 border-radius:8px;
 background:rgba(255,255,255,.15);
 color:white;
-font-size:14px;
 }
 
-.final-center{
+.centro-final{
 display:flex;
 flex-direction:column;
-justify-content:center;
 align-items:center;
+justify-content:center;
 gap:15px;
 margin-top:120px;
 }
 
-.final-center input{
+.centro-final input{
 padding:12px;
 border:none;
-border-radius:10px;
+border-radius:8px;
 background:rgba(255,255,255,.15);
 color:white;
 text-align:center;
@@ -239,13 +237,12 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 ⚽ Camino hacia la Copa del Mundo 2026 ⚽
 </div>
 
-<h2>🏆 Llave Mundial 2026</h2>
+<div class="llave-horizontal">
 
-<div class="bracket">
+<div class="lado-izq">
 
-<div class="round">
+<div class="columna">
 <h3>16avos</h3>
-
 <input placeholder="Equipo 1">
 <input placeholder="Equipo 2">
 <input placeholder="Equipo 3">
@@ -254,69 +251,63 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <input placeholder="Equipo 6">
 <input placeholder="Equipo 7">
 <input placeholder="Equipo 8">
-
 </div>
 
-<div class="round">
+<div class="columna">
 <h3>Octavos</h3>
-
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
-
 </div>
 
-<div class="round">
+<div class="columna">
 <h3>Cuartos</h3>
-
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
-
 </div>
 
-<div class="round">
+<div class="columna">
 <h3>Semifinal</h3>
-
 <input placeholder="Finalista">
+</div>
 
 </div>
 
-<div class="round">
-<h3>🏆 Final</h3>
+<div class="centro-final">
 
-<input placeholder="Campeón">
+<h3>🏆 FINAL 🏆</h3>
+
+<input placeholder="Finalista 1">
+<input placeholder="Finalista 2">
+
+<input class="campeon" placeholder="CAMPEÓN">
 
 </div>
 
-<div class="round">
+<div class="lado-der">
+
+<div class="columna">
 <h3>Semifinal</h3>
-
 <input placeholder="Finalista">
-
 </div>
 
-<div class="round">
+<div class="columna">
 <h3>Cuartos</h3>
-
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
-
 </div>
 
-<div class="round">
+<div class="columna">
 <h3>Octavos</h3>
-
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
 <input placeholder="Clasificado">
-
 </div>
 
-<div class="round">
+<div class="columna">
 <h3>16avos</h3>
-
 <input placeholder="Equipo 9">
 <input placeholder="Equipo 10">
 <input placeholder="Equipo 11">
@@ -325,6 +316,7 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <input placeholder="Equipo 14">
 <input placeholder="Equipo 15">
 <input placeholder="Equipo 16">
+</div>
 
 </div>
 
