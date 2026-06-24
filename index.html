@@ -59,24 +59,41 @@ width:140px;
 }
 
 .r8{
-margin-top:60px;
+margin-top:0px;
 }
 
 .r8 input{
-margin-bottom:70px;
+margin-top: 76px;
+}
+
+.r8 input:first-of-type {
+    margin-top: 20px;
 }
 
 .r4{
-margin-top:150px;
+margin-top:0px;
 }
 
 .r4 input{
-margin-bottom:170px;
+margin-bottom:180px;
+}
+
+.r4 input:first-of-type {
+    margin-top: 80px;
 }
 
 .r2{
-margin-top:290px;
+margin-top:0px;
 }
+
+.r2 input {
+    margin-top: 390px;
+}
+
+.r2 input:first-of-type {
+    margin-top: 180px;
+}
+
 
 .final{
 display:flex;
@@ -311,6 +328,10 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <input placeholder="Ganador 2">
 <input placeholder="Ganador 3">
 <input placeholder="Ganador 4">
+<input placeholder="Ganador 5">
+<input placeholder="Ganador 6">
+<input placeholder="Ganador 7">
+<input placeholder="Ganador 8">
 
 </div>
 
@@ -319,13 +340,16 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
 <input placeholder="Clasificado 1">
 <input placeholder="Clasificado 2">
+<input placeholder="Clasificado 3">
+<input placeholder="Clasificado 4">
 
 </div>
 
 <div class="ronda r2">
 <h3>Semifinal</h3>
 
-<input placeholder="Finalista">
+<input placeholder="Semifinalista 1">
+<input placeholder="Semifinalista 2">
 
 </div>
 
@@ -343,7 +367,8 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <div class="ronda r2">
 <h3>Semifinal</h3>
 
-<input placeholder="Finalista">
+<input placeholder="Semifinalista 1">
+<input placeholder="Semifinalista 2">
 
 </div>
 
@@ -352,6 +377,8 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
 <input placeholder="Clasificado 1">
 <input placeholder="Clasificado 2">
+<input placeholder="Clasificado 3">
+<input placeholder="Clasificado 4">
 
 </div>
 
@@ -362,6 +389,10 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <input placeholder="Ganador 2">
 <input placeholder="Ganador 3">
 <input placeholder="Ganador 4">
+<input placeholder="Ganador 5">
+<input placeholder="Ganador 6">
+<input placeholder="Ganador 7">
+<input placeholder="Ganador 8">
 
 </div>
 
@@ -436,7 +467,7 @@ appId: "1:805704838263:web:15e37a55c8b428442daa72"
 
 const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase);
-const users={tatan18:"admin2011",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",karda:"1111",felipe:"1111",huevo:"1111"};
+const users={tatan18:"1",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",karda:"1111",felipe:"1111",huevo:"1111"};
 const players=["Simon","Junior","David","Tatan","Santiago","Karda","Felipe","Huevo"];
   let usuarioActual = "";
 let esAdmin = false;
