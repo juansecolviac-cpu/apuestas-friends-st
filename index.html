@@ -22,6 +22,34 @@ gap:10px;
 margin-bottom:25px;
 }
 
+    .bracket{
+display:flex;
+gap:30px;
+overflow-x:auto;
+padding:20px 0;
+}
+
+.round{
+display:flex;
+flex-direction:column;
+gap:15px;
+min-width:200px;
+}
+
+.round h3{
+text-align:center;
+color:gold;
+}
+
+.round input{
+padding:12px;
+border:none;
+border-radius:10px;
+background:rgba(255,255,255,.12);
+color:white;
+font-size:15px;
+}
+
 .fase-grid input{
 padding:12px;
 border-radius:10px;
@@ -186,35 +214,63 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
   <div id="fases" class="card hidden">
 
-<h2>🏆 Fases Finales Mundial 2026</h2>
+<h2>🏆 Llave Mundial 2026</h2>
 
-    <div class="banner-fases">
+<div class="banner-fases">
 🏆 Camino hacia la Copa del Mundo 2026
 </div>
 
-    <h3>⚽ 16avos de Final</h3>
+<div class="bracket">
 
-<div class="fase-grid">
+<div class="round">
+<h3>16avos</h3>
 
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
+<input placeholder="Equipo 1">
+<input placeholder="Equipo 2">
 
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
+<input placeholder="Equipo 3">
+<input placeholder="Equipo 4">
 
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
+<input placeholder="Equipo 5">
+<input placeholder="Equipo 6">
 
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
-<input placeholder="País clasificado">
+<input placeholder="Equipo 7">
+<input placeholder="Equipo 8">
+
+</div>
+
+<div class="round">
+<h3>Octavos</h3>
+
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+
+</div>
+
+<div class="round">
+<h3>Cuartos</h3>
+
+<input placeholder="Clasificado">
+<input placeholder="Clasificado">
+
+</div>
+
+<div class="round">
+<h3>Semifinal</h3>
+
+<input placeholder="Finalista">
+</div>
+
+<div class="round">
+<h3>Final</h3>
+
+<input placeholder="Campeón">
+</div>
+
+</div>
 
 </div>
 
