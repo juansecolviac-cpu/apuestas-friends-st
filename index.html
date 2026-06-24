@@ -15,51 +15,6 @@ table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px s
 .l{left:3px}.r{right:3px}.vs{font-size:28px;color:gold;font-weight:bold}
 h2{color:#ffd700}
   .banner-fases{
-    .fase-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:10px;
-margin-bottom:25px;
-}
-
-.bracket{
-display:flex !important;
-flex-direction:row !important;
-align-items:flex-start;
-gap:40px;
-overflow-x:auto;
-padding:20px;
-}
-
-.round{
-display:flex !important;
-flex-direction:column !important;
-gap:15px;
-min-width:180px;
-}
-
-.round h3{
-text-align:center;
-color:gold;
-}
-
-.round input{
-padding:12px;
-border:none;
-border-radius:10px;
-background:rgba(255,255,255,.12);
-color:white;
-font-size:15px;
-}
-
-.fase-grid input{
-padding:12px;
-border-radius:10px;
-border:none;
-background:rgba(255,255,255,.12);
-color:white;
-font-size:15px;
-}
 background:linear-gradient(90deg,#ffd700,#ff9800);
 color:black;
 font-weight:bold;
@@ -69,6 +24,38 @@ text-align:center;
 font-size:18px;
 margin-bottom:20px;
 }
+
+.bracket{
+display:flex;
+justify-content:center;
+align-items:flex-start;
+gap:60px;
+padding:30px;
+overflow-x:auto;
+}
+
+.round{
+display:flex;
+flex-direction:column;
+gap:15px;
+width:180px;
+}
+
+.round h3{
+text-align:center;
+color:gold;
+margin-bottom:10px;
+}
+
+.round input{
+padding:12px;
+border:none;
+border-radius:10px;
+background:rgba(255,255,255,.15);
+color:white;
+font-size:15px;
+}
+  
 </style></head><body>
 <div class="side l">🇲🇽🇺🇸🇨🇦🏆⚽🐺🇲🇽🇺🇸🇨🇦</div>
 <div class="side r">🇨🇦🇺🇸🇲🇽🐺⚽🏆🇨🇦🇺🇸🇲🇽</div>
@@ -218,6 +205,10 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
 <h2>🏆 Llave Mundial 2026</h2>
 
+<div class="banner-fases">
+⚽ Camino hacia la Copa del Mundo 2026 ⚽
+</div>
+
 <div class="bracket">
 
 <div class="round">
@@ -248,7 +239,8 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
 <div class="round">
 <h3>Semifinal</h3>
-<input placeholder="Finalista">
+<input placeholder="Finalista 1">
+<input placeholder="Finalista 2">
 </div>
 
 <div class="round">
