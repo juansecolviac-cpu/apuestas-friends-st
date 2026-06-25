@@ -1358,96 +1358,20 @@ snapshot.forEach(doc=>{
 data.push(doc.data());
 });
 
-mostrarFase(
-data,
-"16avos",
-"contenedor16avos"
-);
-
-mostrarFase(
-data,
-"octavos",
-"contenedorOctavos"
-);
-
-mostrarFase(
-data,
-"cuartos",
-"contenedorCuartos"
-);
-
-mostrarFase(
-data,
-"semifinal",
-"contenedorSemifinal"
-);
-
-mostrarFase(
-data,
-"final",
-"contenedorFinal"
-);
-
-}
-
-  function mostrarFase(data,fase,contenedor){
-
-let html="";
-
-data
-.filter(m => (m.fase || "grupos") === fase)
-.forEach(m=>{
-
-html += `
-
-<div class="grupo-card">
-
-<h3>${m.partido}</h3>
-
-<p>
-⚽ Resultado: ${m.ra}-${m.rb}
-</p>
-
-<p>
-📅 ${m.fecha}
-</p>
-
-<p>
-🏟️ ${m.estadio}
-</p>
-
-</div>
-
-`;
-
-});
-
-if(html===""){
-html="<p>No hay partidos registrados.</p>";
-}
-
-document.getElementById(contenedor).innerHTML=html;
-
-}
-
-  async function actualizarFases(){
-
-const snapshot = await getDocs(collection(db,"partidos"));
-
-let data=[];
-
-snapshot.forEach(doc=>{
-data.push(doc.data());
-});
-
 let fases = {
-"16avos":[],
-"Octavos":[],
-"Cuartos":[],
-"Semifinal":[],
-"Final":[]
-};
 
+"16avos":[],
+
+"octavos":[],
+
+"cuartos":[],
+
+"semifinal":[],
+
+"final":[]
+
+};
+    
 data.forEach(m=>{
 
 if(!m.fase) return;
