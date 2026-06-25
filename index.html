@@ -120,6 +120,45 @@ margin-bottom:30px;
 margin-top:30px;
 margin-bottom:30px;
 }
+
+  .grupos-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.grupo-card{
+background:rgba(255,255,255,.08);
+border-radius:15px;
+padding:10px;
+}
+
+.grupo-card h3{
+text-align:center;
+color:gold;
+margin-bottom:10px;
+}
+
+.grupo-card table{
+width:100%;
+font-size:13px;
+}
+
+.primero{
+background:rgba(255,215,0,.25);
+}
+
+.segundo{
+background:rgba(192,192,192,.25);
+}
+
+.tercero{
+background:rgba(205,127,50,.25);
+}
+
+.cuarto{
+background:rgba(255,0,0,.15);
+}
   
 </style></head><body>
 <div class="side l">🇲🇽🇺🇸🇨🇦🏆⚽🐺🇲🇽🇺🇸🇨🇦</div>
@@ -146,6 +185,7 @@ margin-bottom:30px;
 <button class="primary" onclick="showTab('tabla')">Tabla</button>
   <button class="primary" onclick="showTab('estadisticas')">Estadísticas</button>
   <button class="primary" onclick="showTab('fases')">Fases Finales</button>
+  <button class="primary" onclick="showTab('grupos')">Grupos</button>
 </nav>
 
 <div id="inicio" class="card">
@@ -445,6 +485,14 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
 </div>
 
+  <div id="grupos" class="card hidden">
+
+<h2>🏆 Fase de Grupos</h2>
+
+<div id="contenedorGrupos"></div>
+
+</div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import {
@@ -480,6 +528,34 @@ const paises=[
 "Países Bajos","Panamá","Paraguay","Perú","Portugal","Qatar","RD Congo","Chequia","Costa de Marfil","Arabia Saudita",
 "Escocia","Senegal","Serbia","Sudáfrica","Suecia","Suiza","Túnez","Turquía","Uruguay","Uzbekistán"
 ];
+
+  const grupos = {
+
+A:["México","Sudáfrica","Corea del Sur","Republica Checa"],
+
+B:["Bosnia","Qatar","Canadá","Suiza"],
+
+C:["Brasil","Marruecos","Haiti","Escocia"],
+
+D:["Estados Unidos","Paraguay","Australia","Turquia"],
+
+E:["Alemania","Curazao","Costa de Marfil","Ecuador"],
+
+F:["Paises Bajos","Japon","Suecia","Tunez"],
+
+G:["Belgica","Egipto","Iran","Nueva Zelanda"],
+
+H:["España","Cabo Verde","Arabia Saudita","Uruguay"],
+
+I:["Francia","Senegal","Irak","Noruega"],
+
+J:["Argentina","Argelia","Austria","Jordania"],
+
+K:["Portugal","RD Congo","Uzbekistan","Colombia"],
+
+L:["Inglaterra","Croacia","Ghana","Panama"]
+
+};
 
 const estadios=[
 "Estadio Azteca - Ciudad de México","Estadio BBVA - Monterrey","Estadio Akron - Guadalajara",
@@ -518,6 +594,7 @@ cargarApuestas();
 actualizarInicio();
 cargarEstadisticas();
   actualizarUsuarios();
+  actualizarGrupos();
 
 }else{
 alert("Datos incorrectos");
@@ -527,7 +604,7 @@ alert("Datos incorrectos");
 window.login = login;
 
 function showTab(id){
-["inicio","partidos","apuestas","tabla","estadisticas","fases"]
+["inicio","partidos","apuestas","tabla","estadisticas","fases","grupos"]
 .forEach(x=>document.getElementById(x).classList.add("hidden"));
 
 document.getElementById(id).classList.remove("hidden");
@@ -900,6 +977,7 @@ await loadHistory();
 await cargarApuestas();
 await cargarEstadisticas();
 await calc();
+  await actualizarGrupos();
 
 alert("Partido eliminado");
 
@@ -1025,6 +1103,146 @@ players.map(j=>`
 </tr>
 
 `).join("");
+
+}
+
+  async function actualizarGrupos(){
+
+const snapshot = await getDocs(collection(db,"partidos"));
+
+let data=[];
+
+snapshot.forEach(doc=>{
+data.push(doc.data());
+});
+
+let tabla={};
+
+Object.values(grupos).forEach(grupo=>{
+
+grupo.forEach(eq=>{
+
+tabla[eq]={
+pts:0,
+gf:0,
+gc:0,
+dg:0
+};
+
+});
+
+});
+
+data.forEach(m=>{
+
+let partes = m.partido.split(" VS ");
+
+let a = partes[0];
+let b = partes[1];
+
+if(a==="Colombia" && b==="Colombia"){
+return;
+}
+
+if(!tabla[a] || !tabla[b]){
+return;
+}
+
+tabla[a].gf += m.ra;
+tabla[a].gc += m.rb;
+
+tabla[b].gf += m.rb;
+tabla[b].gc += m.ra;
+
+if(m.ra > m.rb){
+tabla[a].pts += 3;
+}
+
+else if(m.rb > m.ra){
+tabla[b].pts += 3;
+}
+
+else{
+tabla[a].pts += 1;
+tabla[b].pts += 1;
+}
+
+});
+
+Object.keys(tabla).forEach(eq=>{
+tabla[eq].dg=
+tabla[eq].gf-
+tabla[eq].gc;
+});
+
+let html='<div class="grupos-grid">';
+
+Object.entries(grupos).forEach(([letra,equipos])=>{
+
+let lista=equipos.map(eq=>({
+
+nombre:eq,
+
+pts:tabla[eq].pts,
+
+dg:tabla[eq].dg
+
+}));
+
+lista.sort((a,b)=>
+b.pts-a.pts ||
+b.dg-a.dg
+);
+
+html+=`
+
+<div class="grupo-card">
+
+<h3>Grupo ${letra}</h3>
+
+<table>
+
+<tr>
+
+<th>#</th>
+<th>Equipo</th>
+<th>Pts</th>
+<th>DG</th>
+
+</tr>
+
+${lista.map((e,i)=>`
+
+<tr class="${
+i===0?"primero":
+i===1?"segundo":
+i===2?"tercero":
+"cuarto"
+}">
+
+<td>${i+1}</td>
+
+<td>${e.nombre}</td>
+
+<td>${e.pts}</td>
+
+<td>${e.dg}</td>
+
+</tr>
+
+`).join("")}
+
+</table>
+
+</div>
+
+`;
+
+});
+
+html+='</div>';
+
+document.getElementById("contenedorGrupos").innerHTML=html;
 
 }
   
