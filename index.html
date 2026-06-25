@@ -732,20 +732,15 @@ h+=`<div><b>${j}</b>
 inputs.innerHTML=h;
 }
 
-  async function guardarLlave(){
+ async function guardarLlave(){
 
-await setDoc(
-doc(db,"configuracion","llave"),
-{
-equipo1: document.getElementById("equipo1").value,
-equipo2: document.getElementById("equipo2").value,
-equipo3: document.getElementById("equipo3").value,
-equipo4: document.getElementById("equipo4").value
-}
-);
+console.log(document.getElementById("equipo1"));
+console.log(document.getElementById("equipo2"));
+console.log(document.getElementById("equipo3"));
+console.log(document.getElementById("equipo4"));
 
 }
-
+  
 async function saveMatch(){
 
   if(paisA.value === paisB.value){
