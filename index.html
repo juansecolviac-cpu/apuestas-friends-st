@@ -183,9 +183,14 @@ background:rgba(255,0,0,.15);
 <button class="primary" onclick="showTab('partidos')">Partidos</button>
 <button class="primary" onclick="showTab('apuestas')">Apuestas</button>
 <button class="primary" onclick="showTab('tabla')">Tabla</button>
-  <button class="primary" onclick="showTab('estadisticas')">Estadísticas</button>
-  <button class="primary" onclick="showTab('fases')">Fases Finales</button>
-  <button class="primary" onclick="showTab('grupos')">Grupos</button>
+<button class="primary" onclick="showTab('estadisticas')">Estadísticas</button>
+<button class="primary" onclick="showTab('fases')">Fases Finales</button>
+<button class="primary" onclick="showTab('grupos')">Grupos</button>
+<button class="primary" onclick="showTab('dieciseisavos')">16avos</button>
+<button class="primary" onclick="showTab('octavos')">Octavos</button>
+<button class="primary" onclick="showTab('cuartos')">Cuartos</button>
+<button class="primary" onclick="showTab('semifinal')">Semifinal</button>
+<button class="primary" onclick="showTab('final')">Final</button>
 </nav>
 
 <div id="inicio" class="card">
@@ -237,6 +242,19 @@ Fecha:
 
 <select id="paisSede">
 <option>México</option><option>Estados Unidos</option><option>Canadá</option>
+</select>
+
+  <br><br>
+
+<label>Fase:</label>
+
+<select id="fase">
+<option value="grupos">Grupos</option>
+<option value="16avos">16avos</option>
+<option value="octavos">Octavos</option>
+<option value="cuartos">Cuartos</option>
+<option value="semifinal">Semifinal</option>
+<option value="final">Final</option>
 </select>
 
 <select id="estadio"></select><br><br>
@@ -493,6 +511,46 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 
 </div>
 
+  <div id="dieciseisavos" class="card hidden">
+
+<h2>🏆 16avos de Final</h2>
+
+<div id="contenedor16avos"></div>
+
+</div>
+
+<div id="octavos" class="card hidden">
+
+<h2>🏆 Octavos de Final</h2>
+
+<div id="contenedorOctavos"></div>
+
+</div>
+
+<div id="cuartos" class="card hidden">
+
+<h2>🏆 Cuartos de Final</h2>
+
+<div id="contenedorCuartos"></div>
+
+</div>
+
+<div id="semifinal" class="card hidden">
+
+<h2>🏆 Semifinal</h2>
+
+<div id="contenedorSemifinal"></div>
+
+</div>
+
+<div id="final" class="card hidden">
+
+<h2>🏆 Final</h2>
+
+<div id="contenedorFinal"></div>
+
+</div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import {
@@ -593,8 +651,9 @@ loadHistory();
 cargarApuestas();
 actualizarInicio();
 cargarEstadisticas();
-  actualizarUsuarios();
-  actualizarGrupos();
+actualizarUsuarios();
+actualizarGrupos();
+actualizarFases();
 
 }else{
 alert("Datos incorrectos");
@@ -604,7 +663,20 @@ alert("Datos incorrectos");
 window.login = login;
 
 function showTab(id){
-["inicio","partidos","apuestas","tabla","estadisticas","fases","grupos"]
+[
+"inicio",
+"partidos",
+"apuestas",
+"tabla",
+"estadisticas",
+"fases",
+"grupos",
+"dieciseisavos",
+"octavos",
+"cuartos",
+"semifinal",
+"final"
+]
 .forEach(x=>document.getElementById(x).classList.add("hidden"));
 
 document.getElementById(id).classList.remove("hidden");
@@ -646,17 +718,20 @@ await addDoc(collection(db,"partidos"),{
 partido:paisA.value+" VS "+paisB.value,
 fecha:dd.value+"/"+mm.value+"/"+aa.value,
 sede:paisSede.value,
+fase:document.getElementById("fase").value,
 estadio:estadio.value,
 ra:Number(ra.value||0),
 rb:Number(rb.value||0),
 bets:bets
 });
-
+  
 alert("Guardado");
 
 await loadHistory();
 await cargarApuestas();
 await cargarEstadisticas();
+await actualizarGrupos();
+await actualizarFases();
 
 }catch(error){
 
@@ -759,6 +834,7 @@ document.getElementById("history").innerHTML=data.map(m=>`
 <h3>${m.partido}</h3>
 📅 ${m.fecha}<br>
 🌎 ${m.sede}<br>
+🏆 ${m.fase || "grupos"}<br>
 🏟️ ${m.estadio}<br>
 ⚽ Resultado: ${m.ra}-${m.rb}
 </div>`).join("");
@@ -1246,15 +1322,97 @@ html+='</div>';
 document.getElementById("contenedorGrupos").innerHTML=html;
 
 }
+
+  async function actualizarFases(){
+
+const snapshot = await getDocs(collection(db,"partidos"));
+
+let data=[];
+
+snapshot.forEach(doc=>{
+data.push(doc.data());
+});
+
+mostrarFase(
+data,
+"16avos",
+"contenedor16avos"
+);
+
+mostrarFase(
+data,
+"octavos",
+"contenedorOctavos"
+);
+
+mostrarFase(
+data,
+"cuartos",
+"contenedorCuartos"
+);
+
+mostrarFase(
+data,
+"semifinal",
+"contenedorSemifinal"
+);
+
+mostrarFase(
+data,
+"final",
+"contenedorFinal"
+);
+
+}
+
+  function mostrarFase(data,fase,contenedor){
+
+let html="";
+
+data
+.filter(m => (m.fase || "grupos") === fase)
+.forEach(m=>{
+
+html += `
+
+<div class="grupo-card">
+
+<h3>${m.partido}</h3>
+
+<p>
+⚽ Resultado: ${m.ra}-${m.rb}
+</p>
+
+<p>
+📅 ${m.fecha}
+</p>
+
+<p>
+🏟️ ${m.estadio}
+</p>
+
+</div>
+
+`;
+
+});
+
+if(html===""){
+html="<p>No hay partidos registrados.</p>";
+}
+
+document.getElementById(contenedor).innerHTML=html;
+
+}
   
   window.login = login;
 window.showTab = showTab;
 window.saveMatch = saveMatch;
 window.calc = calc;
 window.borrarHistorial = borrarHistorial;
-  window.filtrarPartidos = filtrarPartidos;
+window.filtrarPartidos = filtrarPartidos;
 window.filtrarApuestas = filtrarApuestas;
-  window.borrarPartido = borrarPartido;
+window.borrarPartido = borrarPartido;
 
 
 </script></body></html>
