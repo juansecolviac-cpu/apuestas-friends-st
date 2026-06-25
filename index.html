@@ -353,16 +353,13 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <h3>16avos</h3>
 
 <div class="partido">
-<input
-id="equipo1"
-placeholder="Equipo 1"
-onchange="guardarLlave()">
-<input placeholder="Equipo 2">
+<input id="equipo1" placeholder="Equipo 1">
+<input id="equipo2" placeholder="Equipo 2">
 </div>
 
 <div class="partido">
-<input placeholder="Equipo 3">
-<input placeholder="Equipo 4">
+<input id="equipo3" placeholder="Equipo 3">
+<input id="equipo4" placeholder="Equipo 4">
 </div>
 
 <div class="partido">
@@ -580,7 +577,7 @@ onchange="guardarLlave()">
 </div>
   
 <script type="module">
- import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 import {
   getFirestore,
@@ -590,8 +587,7 @@ import {
   deleteDoc,
   doc,
   setDoc,
-  getDoc,
-  onSnapshot
+  getDoc
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 const firebaseConfig = {
