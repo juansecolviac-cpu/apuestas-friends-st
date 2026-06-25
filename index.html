@@ -732,12 +732,29 @@ h+=`<div><b>${j}</b>
 inputs.innerHTML=h;
 }
 
- async function guardarLlave(){
+async function guardarLlave(){
 
-console.log(document.getElementById("equipo1"));
-console.log(document.getElementById("equipo2"));
-console.log(document.getElementById("equipo3"));
-console.log(document.getElementById("equipo4"));
+const e1 = document.getElementById("equipo1");
+const e2 = document.getElementById("equipo2");
+const e3 = document.getElementById("equipo3");
+const e4 = document.getElementById("equipo4");
+
+if(!e1 || !e2 || !e3 || !e4){
+  console.log("Faltan inputs");
+  return;
+}
+
+await setDoc(
+  doc(db,"configuracion","llave"),
+  {
+    equipo1: e1.value,
+    equipo2: e2.value,
+    equipo3: e3.value,
+    equipo4: e4.value
+  }
+);
+
+console.log("Llave guardada");
 
 }
   
@@ -1524,7 +1541,11 @@ window.filtrarPartidos = filtrarPartidos;
 window.filtrarApuestas = filtrarApuestas;
 window.borrarPartido = borrarPartido;
 window.guardarLlave = guardarLlave;
-  setInterval(cargarLlave,3000);
+  setInterval(()=>{
+   if(!esAdmin){
+      cargarLlave();
+   }
+},3000);
   console.log("guardarLlave cargada");
 
 
