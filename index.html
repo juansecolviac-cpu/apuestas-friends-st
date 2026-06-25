@@ -353,7 +353,10 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <h3>16avos</h3>
 
 <div class="partido">
-<input placeholder="Equipo 1">
+<input
+id="equipo1"
+placeholder="Equipo 1"
+onchange="guardarLlave()">
 <input placeholder="Equipo 2">
 </div>
 
@@ -578,13 +581,14 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
   
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-import {
 getFirestore,
 collection,
 addDoc,
 getDocs,
 deleteDoc,
-doc
+doc,
+setDoc,
+getDoc
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -679,6 +683,7 @@ cargarEstadisticas();
 actualizarUsuarios();
 actualizarGrupos();
 actualizarFases();
+cargarLlave();
 
 }else{
 alert("Datos incorrectos");
@@ -718,6 +723,20 @@ h+=`<div><b>${j}</b>
 });
   
 inputs.innerHTML=h;
+}
+
+  async function guardarLlave(){
+
+await setDoc(
+doc(db,"configuracion","llave"),
+{
+equipo1: document.getElementById("equipo1").value,
+equipo2: document.getElementById("equipo2").value,
+equipo3: document.getElementById("equipo3").value,
+equipo4: document.getElementById("equipo4").value
+}
+);
+
 }
 
 async function saveMatch(){
@@ -1464,6 +1483,35 @@ document.getElementById("tablaFinal").innerHTML =
 crearTabla(fases["final"],"Final");
     
 }
+
+  async function cargarLlave(){
+
+const snap =
+await getDoc(
+doc(db,"configuracion","llave")
+);
+
+if(!snap.exists()) return;
+
+const datos = snap.data();
+
+if(document.getElementById("equipo1"))
+document.getElementById("equipo1").value =
+datos.equipo1 || "";
+
+if(document.getElementById("equipo2"))
+document.getElementById("equipo2").value =
+datos.equipo2 || "";
+
+if(document.getElementById("equipo3"))
+document.getElementById("equipo3").value =
+datos.equipo3 || "";
+
+if(document.getElementById("equipo4"))
+document.getElementById("equipo4").value =
+datos.equipo4 || "";
+
+}
   
   window.login = login;
 window.showTab = showTab;
@@ -1473,6 +1521,7 @@ window.borrarHistorial = borrarHistorial;
 window.filtrarPartidos = filtrarPartidos;
 window.filtrarApuestas = filtrarApuestas;
 window.borrarPartido = borrarPartido;
+window.guardarLlave = guardarLlave;
 
 
 </script></body></html>
