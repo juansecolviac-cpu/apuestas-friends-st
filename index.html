@@ -744,8 +744,6 @@ if(!e1 || !e2 || !e3 || !e4){
   return;
 }
 
-try{
-
 await setDoc(
   doc(db,"configuracion","llave"),
   {
@@ -756,13 +754,7 @@ await setDoc(
   }
 );
 
-console.log("Llave guardada correctamente");
-
-}catch(error){
-
-console.error("ERROR FIREBASE:", error);
-
-}
+console.log("Llave guardada");
   
 async function saveMatch(){
 
