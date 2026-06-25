@@ -650,19 +650,19 @@ const estadios=[
 "BMO Field","BC Place","Gillette Stadium","Arrowhead Stadium"
 ];
 
-window.onload = () => {
-
-const paisA = document.getElementById("paisA");
-const paisB = document.getElementById("paisB");
-const estadio = document.getElementById("estadio");
+window.onload=()=>{
 
 paises.forEach(p=>{
-paisA.innerHTML += `<option>${p}</option>`;
-paisB.innerHTML += `<option>${p}</option>`;
+paisA.innerHTML+=`<option>${p}</option>`;
+paisB.innerHTML+=`<option>${p}</option>`;
 });
 
-estadios.forEach(e=>{
-estadio.innerHTML += `<option>${e}</option>`;
+estadios.forEach(e=>
+estadio.innerHTML+=`<option>${e}</option>`
+);
+
+document.querySelectorAll("#fases input").forEach(input=>{
+input.setAttribute("oninput","guardarLlave()");
 });
 
 };
