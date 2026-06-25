@@ -353,8 +353,8 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <h3>16avos</h3>
 
 <div class="partido">
-<input id="equipo1" placeholder="Equipo 1">
-<input id="equipo2" placeholder="Equipo 2">
+<input id="equipo1" placeholder="Equipo 1" onchange="guardarLlave()">
+<input id="equipo1" placeholder="Equipo 2" onchange="guardarLlave()">
 </div>
 
 <div class="partido">
@@ -1530,6 +1530,7 @@ window.filtrarApuestas = filtrarApuestas;
 window.borrarPartido = borrarPartido;
 window.guardarLlave = guardarLlave;
   setInterval(cargarLlave,3000);
+  console.log("guardarLlave cargada");
 
 
 </script></body></html>
