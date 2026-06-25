@@ -1519,20 +1519,6 @@ document.getElementById("equipo4").value =
 datos.equipo4 || "";
 
 }
-
-  async function guardarLlave(){
-
-await setDoc(
-doc(db,"configuracion","llave"),
-{
-equipo1: document.getElementById("equipo1").value,
-equipo2: document.getElementById("equipo2").value,
-equipo3: document.getElementById("equipo3").value,
-equipo4: document.getElementById("equipo4").value
-}
-);
-
-}
   
   window.login = login;
 window.showTab = showTab;
