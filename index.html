@@ -743,27 +743,20 @@ inputs.innerHTML=h;
 
 async function guardarLlave(){
 
-const e1 = document.getElementById("equipo1");
-const e2 = document.getElementById("equipo2");
-const e3 = document.getElementById("equipo3");
-const e4 = document.getElementById("equipo4");
+let datos = {};
 
-if(!e1 || !e2 || !e3 || !e4){
-  console.log("Faltan inputs");
-  return;
-}
+document
+.querySelectorAll("#fases input")
+.forEach((input,i)=>{
+
+datos["campo"+i] = input.value;
+
+});
 
 await setDoc(
-  doc(db,"configuracion","llave"),
-  {
-    equipo1: e1.value,
-    equipo2: e2.value,
-    equipo3: e3.value,
-    equipo4: e4.value
-  }
+doc(db,"configuracion","llave"),
+datos
 );
-
-console.log("Llave guardada");
 
 }
   
@@ -1516,21 +1509,20 @@ crearTabla(fases["final"],"Final");
  async function cargarLlave(){
 
 const snap = await getDoc(
-  doc(db,"configuracion","llave")
+doc(db,"configuracion","llave")
 );
-
-console.log("EXISTE:", snap.exists());
 
 if(!snap.exists()) return;
 
 const datos = snap.data();
 
-console.log("DATOS FIREBASE:", datos);
+document
+.querySelectorAll("#fases input")
+.forEach((input,i)=>{
 
-document.getElementById("equipo1").value = datos.equipo1 || "";
-document.getElementById("equipo2").value = datos.equipo2 || "";
-document.getElementById("equipo3").value = datos.equipo3 || "";
-document.getElementById("equipo4").value = datos.equipo4 || "";
+input.value = datos["campo"+i] || "";
+
+});
 
 }
   
