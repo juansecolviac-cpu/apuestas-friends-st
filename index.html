@@ -580,15 +580,18 @@ onchange="guardarLlave()">
 </div>
   
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-getFirestore,
-collection,
-addDoc,
-getDocs,
-deleteDoc,
-doc,
-setDoc,
-getDoc
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  setDoc,
+  getDoc,
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 const firebaseConfig = {
