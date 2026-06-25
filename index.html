@@ -684,6 +684,14 @@ actualizarGrupos();
 actualizarFases();
 cargarLlave();
 
+  if(!esAdmin){
+
+document.querySelectorAll("#fases input").forEach(i=>{
+i.disabled = true;
+});
+
+}
+
 }else{
 alert("Datos incorrectos");
 }
@@ -1521,6 +1529,7 @@ window.filtrarPartidos = filtrarPartidos;
 window.filtrarApuestas = filtrarApuestas;
 window.borrarPartido = borrarPartido;
 window.guardarLlave = guardarLlave;
+  setInterval(cargarLlave,3000);
 
 
 </script></body></html>
