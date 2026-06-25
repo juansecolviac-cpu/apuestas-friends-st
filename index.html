@@ -529,31 +529,31 @@ const paises=[
 "Escocia","Senegal","Serbia","Sudáfrica","Suecia","Suiza","Túnez","Turquía","Uruguay","Uzbekistán"
 ];
 
-  const grupos = {
+ const grupos = {
 
-A:["México","Sudáfrica","Corea del Sur","Republica Checa"],
+A:["México","Sudáfrica","Corea del Sur","Chequia"],
 
-B:["Bosnia","Qatar","Canadá","Suiza"],
+B:["Bosnia y Herzegovina","Qatar","Canadá","Suiza"],
 
-C:["Brasil","Marruecos","Haiti","Escocia"],
+C:["Brasil","Marruecos","Haití","Escocia"],
 
-D:["Estados Unidos","Paraguay","Australia","Turquia"],
+D:["Estados Unidos","Paraguay","Australia","Turquía"],
 
 E:["Alemania","Curazao","Costa de Marfil","Ecuador"],
 
-F:["Paises Bajos","Japon","Suecia","Tunez"],
+F:["Países Bajos","Japón","Suecia","Túnez"],
 
-G:["Belgica","Egipto","Iran","Nueva Zelanda"],
+G:["Bélgica","Egipto","Irán","Nueva Zelanda"],
 
-H:["España","Cabo Verde","Arabia Saudita","Uruguay"],
+H:["España","Cabo Verde","Arabia Saudita","Uruguay"],
 
 I:["Francia","Senegal","Irak","Noruega"],
 
 J:["Argentina","Argelia","Austria","Jordania"],
 
-K:["Portugal","RD Congo","Uzbekistan","Colombia"],
+K:["Portugal","RD Congo","Uzbekistán","Colombia"],
 
-L:["Inglaterra","Croacia","Ghana","Panama"]
+L:["Inglaterra","Croacia","Ghana","Panamá"]
 
 };
 
@@ -976,8 +976,8 @@ alert("SE EJECUTÓ DELETE");
 await loadHistory();
 await cargarApuestas();
 await cargarEstadisticas();
+await actualizarGrupos();
 await calc();
-  await actualizarGrupos();
 
 alert("Partido eliminado");
 
@@ -1140,11 +1140,12 @@ let partes = m.partido.split(" VS ");
 let a = partes[0];
 let b = partes[1];
 
-if(a==="Colombia" && b==="Colombia"){
+if(a.trim().toLowerCase() === b.trim().toLowerCase()){
 return;
 }
-
+  
 if(!tabla[a] || !tabla[b]){
+console.log("No encontrado:", a, b);
 return;
 }
 
