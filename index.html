@@ -204,7 +204,7 @@ color:gold;
 <button class="primary" onclick="showTab('dieciseisavos')">16avos</button>
 <button class="primary" onclick="showTab('octavos')">Octavos</button>
 <button class="primary" onclick="showTab('cuartos')">Cuartos</button>
-<button class="primary" onclick="showTab('semifinal')">Semifinal</button>
+<button class="primary" onclick="showTab('semifinales')">Semifinal</button>
 <button class="primary" onclick="showTab('final')">Final</button>
 </nav>
 
@@ -699,7 +699,7 @@ function showTab(id){
 "dieciseisavos",
 "octavos",
 "cuartos",
-"semifinal",
+"semifinales",
 "final"
 ]
 .forEach(x=>document.getElementById(x).classList.add("hidden"));
@@ -1451,21 +1451,18 @@ return html;
 
 }
 
-document.getElementById("tabla16avos").innerHTML =
-crearTabla(fases["16avos"],"16avos");
-
 document.getElementById("tablaOctavos").innerHTML =
-crearTabla(fases["Octavos"],"Octavos");
+crearTabla(fases["octavos"],"Octavos");
 
 document.getElementById("tablaCuartos").innerHTML =
-crearTabla(fases["Cuartos"],"Cuartos");
+crearTabla(fases["cuartos"],"Cuartos");
 
 document.getElementById("tablaSemifinales").innerHTML =
-crearTabla(fases["Semifinal"],"Semifinal");
+crearTabla(fases["semifinal"],"Semifinal");
 
 document.getElementById("tablaFinal").innerHTML =
-crearTabla(fases["Final"],"Final");
-
+crearTabla(fases["final"],"Final");
+    
 }
   
   window.login = login;
