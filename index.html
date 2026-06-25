@@ -740,21 +740,30 @@ const e3 = document.getElementById("equipo3");
 const e4 = document.getElementById("equipo4");
 
 if(!e1 || !e2 || !e3 || !e4){
-  console.log("Faltan inputs");
   return;
 }
+
+try{
 
 await setDoc(
   doc(db,"configuracion","llave"),
   {
-    equipo1: e1.value,
-    equipo2: e2.value,
-    equipo3: e3.value,
-    equipo4: e4.value
+    equipo1:e1.value,
+    equipo2:e2.value,
+    equipo3:e3.value,
+    equipo4:e4.value
   }
 );
 
-console.log("Llave guardada");
+console.log("Llave guardada correctamente");
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
   
 async function saveMatch(){
 
