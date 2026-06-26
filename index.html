@@ -844,7 +844,13 @@ data.forEach(m=>{
 console.log("PUNTOS:", s);
 
 let o=Object.entries(s).sort((a,b)=>b[1]-a[1]);
-rank.innerHTML=o.map((x,i)=>`<tr><td>${i==0?"🥇":i==1?"🥈":i==2?"🥉":i+1}</td><td>${x[0]}</td><td>${x[1]}</td></tr>`).join("");
+rank.innerHTML=o.map((x,i)=>`
+<tr>
+<td>${i==0?"🥇":i==1?"🥈":i==2?"🥉":i+1}</td>
+<td>${x[0]=="Simon" ? "Simon (Descalificado)" : x[0]}</td>
+<td>${x[1]}</td>
+</tr>
+`).join("");
 }
   
 async function loadHistory(){
