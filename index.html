@@ -278,8 +278,20 @@ Fecha:
 <option value="final">Final</option>
 </select>
 
-<select id="estadio"></select><br><br>
+<select id="estadio"></select>
 
+<div id="penalesBox" style="display:none;margin-top:10px;">
+
+<b>Penales</b><br>
+
+<input id="penalesA" type="number" placeholder="Equipo A" style="width:70px">
+
+-
+
+<input id="penalesB" type="number" placeholder="Equipo B" style="width:70px">
+
+</div>
+  
 Resultado:
 <input id="ra" type="number" style="width:60px">-
 <input id="rb" type="number" style="width:60px">
@@ -750,21 +762,27 @@ document.getElementById(id).classList.remove("hidden");
 }
   window.showTab = showTab;
 
-  function mostrarPenales(){
+ function mostrarPenales(){
 
-const fase=document.getElementById("fase").value;
+    const fase = document.getElementById("fase").value;
 
-if(fase=="grupos"){
+    const divPenales = document.getElementById("penales");
 
-document.getElementById("penales").style.display="none";
-
-}else{
-
-document.getElementById("penales").style.display="block";
+    if(
+        fase === "16avos" ||
+        fase === "octavos" ||
+        fase === "cuartos" ||
+        fase === "semifinal" ||
+        fase === "final"
+    ){
+        divPenales.style.display = "block";
+    }else{
+        divPenales.style.display = "none";
+    }
 
 }
 
-}
+window.mostrarPenales = mostrarPenales;
 
 function buildInputs(){
 let h="";
@@ -826,8 +844,8 @@ estadio:estadio.value,
 ra:Number(ra.value||0),
 rb:Number(rb.value||0),
 
-pa:Number(document.getElementById("pa").value||0),
-pb:Number(document.getElementById("pb").value||0),
+penalesA:Number(document.getElementById("penalesA").value||0),
+penalesB:Number(document.getElementById("penalesB").value||0),
 
 bets:bets
 
@@ -1606,6 +1624,24 @@ input.value = datos["campo"+i] || "";
 });
 
 }
+
+  function mostrarPenales(){
+
+const fase = document.getElementById("fase").value;
+
+if(
+fase==="16avos" ||
+fase==="octavos" ||
+fase==="cuartos" ||
+fase==="semifinal" ||
+fase==="final"
+){
+document.getElementById("penalesBox").style.display="block";
+}else{
+document.getElementById("penalesBox").style.display="none";
+}
+
+}
   
   window.login = login;
 window.showTab = showTab;
@@ -1616,6 +1652,7 @@ window.filtrarPartidos = filtrarPartidos;
 window.filtrarApuestas = filtrarApuestas;
 window.borrarPartido = borrarPartido;
 window.guardarLlave = guardarLlave;
+window.mostrarPenales = mostrarPenales;
   setInterval(()=>{
    if(!esAdmin){
       cargarLlave();
