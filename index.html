@@ -296,15 +296,6 @@ Resultado:
 <input id="ra" type="number" style="width:60px">-
 <input id="rb" type="number" style="width:60px">
 
-<div id="penales" style="display:none;margin-top:10px;">
-
-<b>Penales</b><br>
-
-<input id="pa" type="number" style="width:60px">-
-<input id="pb" type="number" style="width:60px">
-
-</div>
-
 <br><br>
 
 <div id="inputs"></div>
@@ -761,28 +752,6 @@ function showTab(id){
 document.getElementById(id).classList.remove("hidden");
 }
   window.showTab = showTab;
-
- function mostrarPenales(){
-
-    const fase = document.getElementById("fase").value;
-
-    const divPenales = document.getElementById("penales");
-
-    if(
-        fase === "16avos" ||
-        fase === "octavos" ||
-        fase === "cuartos" ||
-        fase === "semifinal" ||
-        fase === "final"
-    ){
-        divPenales.style.display = "block";
-    }else{
-        divPenales.style.display = "none";
-    }
-
-}
-
-window.mostrarPenales = mostrarPenales;
 
 function buildInputs(){
 let h="";
