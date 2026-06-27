@@ -269,7 +269,7 @@ Fecha:
 
 <label>Fase:</label>
 
-<select id="fase">
+<select id="fase" onchange="mostrarPenales()">
 <option value="grupos">Grupos</option>
 <option value="16avos">16avos</option>
 <option value="octavos">Octavos</option>
@@ -282,7 +282,18 @@ Fecha:
 
 Resultado:
 <input id="ra" type="number" style="width:60px">-
-<input id="rb" type="number" style="width:60px"><br><br>
+<input id="rb" type="number" style="width:60px">
+
+<div id="penales" style="display:none;margin-top:10px;">
+
+<b>Penales</b><br>
+
+<input id="pa" type="number" style="width:60px">-
+<input id="pb" type="number" style="width:60px">
+
+</div>
+
+<br><br>
 
 <div id="inputs"></div>
 <button class="primary" onclick="saveMatch()">Guardar Partido</button>
@@ -739,6 +750,22 @@ document.getElementById(id).classList.remove("hidden");
 }
   window.showTab = showTab;
 
+  function mostrarPenales(){
+
+const fase=document.getElementById("fase").value;
+
+if(fase=="grupos"){
+
+document.getElementById("penales").style.display="none";
+
+}else{
+
+document.getElementById("penales").style.display="block";
+
+}
+
+}
+
 function buildInputs(){
 let h="";
 players.forEach(j=>{
@@ -790,6 +817,7 @@ b:Number(document.getElementById(j+"b").value||0)
 });
 
 await addDoc(collection(db,"partidos"),{
+
 partido:paisA.value+" VS "+paisB.value,
 fecha:dd.value+"/"+mm.value+"/"+aa.value,
 sede:paisSede.value,
@@ -797,7 +825,12 @@ fase:document.getElementById("fase").value,
 estadio:estadio.value,
 ra:Number(ra.value||0),
 rb:Number(rb.value||0),
+
+pa:Number(document.getElementById("pa").value||0),
+pb:Number(document.getElementById("pb").value||0),
+
 bets:bets
+
 });
   
 alert("Guardado");
@@ -1474,13 +1507,34 @@ let equipos = p.partido.split(" VS ");
 let equipoA = equipos[0];
 let equipoB = equipos[1];
 
-let clasificado = "Empate";
+let clasificado="Empate";
 
-if(p.ra > p.rb){
-clasificado = equipoA;
+if(p.ra>p.rb){
+
+clasificado=equipoA;
+
 }
-else if(p.rb > p.ra){
-clasificado = equipoB;
+
+else if(p.rb>p.ra){
+
+clasificado=equipoB;
+
+}
+
+else{
+
+if((p.pa||0)>(p.pb||0)){
+
+clasificado=equipoA;
+
+}
+
+else if((p.pb||0)>(p.pa||0)){
+
+clasificado=equipoB;
+
+}
+
 }
 
 html += `
@@ -1488,7 +1542,15 @@ html += `
 
 <td>${equipoA}</td>
 
-<td>${p.ra}-${p.rb}</td>
+<td>
+
+${p.ra}-${p.rb}
+
+${p.ra==p.rb && (p.pa||p.pb)
+? "<br><small>Pen: "+p.pa+"-"+p.pb+"</small>"
+: ""}
+
+</td>
 
 <td>${equipoB}</td>
 
@@ -1507,6 +1569,9 @@ html+=`
 return html;
 
 }
+
+document.getElementById("tabla16avos").innerHTML =
+crearTabla(fases["16avos"],"16avos");
 
 document.getElementById("tablaOctavos").innerHTML =
 crearTabla(fases["octavos"],"Octavos");
