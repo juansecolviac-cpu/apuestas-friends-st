@@ -1494,33 +1494,30 @@ let equipos = p.partido.split(" VS ");
 let equipoA = equipos[0];
 let equipoB = equipos[1];
 
-let clasificado="Empate";
+let clasificado = "Empate";
 
-if(p.ra>p.rb){
+if(p.ra > p.rb){
 
-clasificado=equipoA;
-
-}
-
-else if(p.rb>p.ra){
-
-clasificado=equipoB;
+    clasificado = equipoA;
 
 }
+else if(p.rb > p.ra){
 
+    clasificado = equipoB;
+
+}
 else{
 
-if((p.pa||0)>(p.pb||0)){
+    if((p.penalesA || 0) > (p.penalesB || 0)){
 
-clasificado=equipoA;
+        clasificado = equipoA + " (Penales)";
 
-}
+    }
+    else if((p.penalesB || 0) > (p.penalesA || 0)){
 
-else if((p.pb||0)>(p.pa||0)){
+        clasificado = equipoB + " (Penales)";
 
-clasificado=equipoB;
-
-}
+    }
 
 }
 
@@ -1533,8 +1530,8 @@ html += `
 
 ${p.ra}-${p.rb}
 
-${p.ra==p.rb && (p.pa||p.pb)
-? "<br><small>Pen: "+p.pa+"-"+p.pb+"</small>"
+${p.ra==p.rb && ((p.penalesA||0)>0 || (p.penalesB||0)>0)
+? "<br><small>Pen: "+p.penalesA+"-"+p.penalesB+"</small>"
 : ""}
 
 </td>
