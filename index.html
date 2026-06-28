@@ -1095,8 +1095,8 @@ onclick="borrarPartido('${m.id}')">
 
 players.forEach(j=>{
 
-let b = m.bets[j];
-
+let b = m.bets[clavesJugadores[j]];
+  
 if(!b){
 b = {
 no:true,
