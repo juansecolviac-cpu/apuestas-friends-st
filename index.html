@@ -627,8 +627,8 @@ appId: "1:805704838263:web:15e37a55c8b428442daa72"
 
 const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase);
-const users={tatan18:"1",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",karda:"1111",felipe:"1111",huevo:"1111"};
-const players=["Simon","Junior","David","Tatan","Santiago","Karda","Felipe","Huevo"];
+const users={tatan18:"1",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",conde:"1111",felipe:"1111",huevo:"1111"};
+const players=["Simon","Junior","David","Tatan","Santiago","Conde","Felipe","Huevo"];
   let usuarioActual = "";
 let esAdmin = false;
 
@@ -853,7 +853,7 @@ snapshot.forEach(doc=>{
 
 console.log("PARTIDOS:", data);
 
-let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0,Karda:20,Felipe:20,Huevo:20};
+let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0,Conde:20,Felipe:20,Huevo:20};
 
 data.forEach(m=>{
   players.forEach(j=>{
@@ -1182,7 +1182,7 @@ Junior:0,
 David:0,
 Tatan:0,
 Santiago:0,
-Karda:20,
+Conde:20,
 Felipe:20,
 Huevo:20
 };
