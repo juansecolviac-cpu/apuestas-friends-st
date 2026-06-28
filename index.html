@@ -629,6 +629,18 @@ const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase);
 const users={tatan18:"1",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",conde:"1111",felipe:"1111",huevo:"1111"};
 const players=["Simon","Junior","David","Tatan","Santiago","Conde","Felipe","Huevo"];
+
+  const clavesJugadores = {
+    Simon: "Simon",
+    Junior: "Junior",
+    David: "David",
+    Tatan: "Tatan",
+    Santiago: "Santiago",
+    Conde: "Karda",
+    Felipe: "Felipe",
+    Huevo: "Huevo"
+};
+  
   let usuarioActual = "";
 let esAdmin = false;
 
@@ -798,7 +810,7 @@ try{
 let bets={};
 
 players.forEach(j=>{
-bets[j]={
+bets[clavesJugadores[j]]={
 no:document.getElementById(j+"no").value==="1",
 a:Number(document.getElementById(j+"a").value||0),
 b:Number(document.getElementById(j+"b").value||0)
@@ -857,10 +869,21 @@ let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0,Conde:20,Felipe:20,Huevo:20};
 
 data.forEach(m=>{
   players.forEach(j=>{
-    if(m.bets[j] && !m.bets[j].no){
-      s[j]+=points(m.bets[j].a,m.bets[j].b,m.ra,m.rb);
+
+    let apuesta = m.bets[clavesJugadores[j]];
+
+    if(apuesta && !apuesta.no){
+
+        s[j]+=points(
+            apuesta.a,
+            apuesta.b,
+            m.ra,
+            m.rb
+        );
+
     }
-  });
+
+});
 });
   
 console.log("PUNTOS:", s);
@@ -1032,7 +1055,7 @@ let mejorPuntaje = -1;
 
 players.forEach(j=>{
 
-  let b = m.bets[j];
+  let b = m.bets[clavesJugadores[j]];
 
   if(!b){
     return;
@@ -1188,11 +1211,24 @@ Huevo:20
 };
 
 data.forEach(m=>{
+
 players.forEach(j=>{
-if(m.bets[j] && !m.bets[j].no){
-s[j]+=points(m.bets[j].a,m.bets[j].b,m.ra,m.rb);
+
+let apuesta = m.bets[clavesJugadores[j]];
+
+if(apuesta && !apuesta.no){
+
+s[j]+=points(
+apuesta.a,
+apuesta.b,
+m.ra,
+m.rb
+);
+
 }
+
 });
+
 });
 
 let lider = Object.entries(s).sort((a,b)=>b[1]-a[1])[0];
@@ -1251,7 +1287,7 @@ data.forEach(m=>{
 
 players.forEach(j=>{
 
-let b = m.bets[j];
+let b = m.bets[clavesJugadores[j]];
 
 if(!b || b.no) return;
 
