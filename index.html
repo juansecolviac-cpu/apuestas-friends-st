@@ -212,6 +212,13 @@ class="primary hidden"
 onclick="showTab('liga')">
 Liga
 </button>
+
+  <button
+id="btnEquipos"
+class="primary hidden"
+onclick="showTab('equipos')">
+Equipos
+</button>
   
 <button class="primary" onclick="showTab('fases')">Fases Finales</button>
 <button class="primary" onclick="showTab('grupos')">Grupos</button>
@@ -394,6 +401,50 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <div id="tablaLiga">
 
 <p>Aún no hay datos.</p>
+
+</div>
+
+</div>
+
+  <div id="equipos" class="card hidden">
+
+<h2>⚙️ Equipos</h2>
+
+<div id="panelEquipos" class="hidden">
+
+<input
+id="nombreEquipo"
+placeholder="Nombre del equipo">
+
+<br><br>
+
+<input
+id="ciudadEquipo"
+placeholder="Ciudad">
+
+<br><br>
+
+<input
+id="estadioEquipo"
+placeholder="Estadio">
+
+<br><br>
+
+<button
+class="primary"
+onclick="guardarEquipo()">
+Guardar Equipo
+</button>
+
+<hr>
+
+</div>
+
+<h3>Equipos registrados</h3>
+
+<div id="listaEquipos">
+
+Aún no hay equipos.
 
 </div>
 
@@ -1785,9 +1836,13 @@ if(configuracion.tipo=="liga"){
 
 document.getElementById("btnLiga").classList.remove("hidden");
 
+document.getElementById("btnEquipos").classList.remove("hidden");
+
 }else{
 
 document.getElementById("btnLiga").classList.add("hidden");
+
+document.getElementById("btnEquipos").classList.add("hidden");
 
 }
 
