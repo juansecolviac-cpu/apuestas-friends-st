@@ -234,6 +234,42 @@ color:gold;
 <div id="adminPanel" class="hidden">
 <h2>Agregar Partido</h2>
 
+  <hr>
+
+<h3>⚙️ Configuración del torneo</h3>
+
+<label>Nombre del torneo</label><br>
+
+<input
+id="nombreTorneo"
+placeholder="Ej: Mundial 2026">
+
+<br><br>
+
+<label>Tipo de torneo</label><br>
+
+<select id="tipoTorneo">
+
+<option value="mundial">
+🌍 Mundial
+</option>
+
+<option value="liga">
+🇨🇴 Liga Colombiana
+</option>
+
+</select>
+
+<br><br>
+
+<button
+class="primary"
+onclick="guardarConfiguracion()">
+Guardar configuración
+</button>
+
+<hr>
+
 <select id="paisA"></select>
 <span class="vs">VS</span>
 <select id="paisB"></select><br><br>
