@@ -186,8 +186,8 @@ color:gold;
 <div class="side r">🇨🇦🇺🇸🇲🇽🐺⚽🏆🇨🇦🇺🇸🇲🇽</div>
 
 <header>
-<h1>🏆 FIFA WORLD CUP 2026 - FRIENDS ST 🏆</h1>
-<p>🇲🇽 México • 🇺🇸 Estados Unidos • 🇨🇦 Canadá</p>
+<h1 id="tituloTorneo">🏆 FIFA WORLD CUP 2026 - FRIENDS ST 🏆</h1>
+<p id="subtituloTorneo">🇲🇽 México • 🇺🇸 Estados Unidos • 🇨🇦 Canadá</p>
 </header>
 
 <div id="loginBox" class="container">
@@ -1745,6 +1745,21 @@ configuracion.nombre || "";
 
 document.getElementById("tipoTorneo").value =
 configuracion.tipo || "mundial";
+
+    document.getElementById("tituloTorneo").innerHTML =
+"🏆 " + configuracion.nombre + " - FRIENDS ST 🏆";
+
+if(configuracion.tipo=="mundial"){
+
+document.getElementById("subtituloTorneo").innerHTML =
+"🇲🇽 México • 🇺🇸 Estados Unidos • 🇨🇦 Canadá";
+
+}else{
+
+document.getElementById("subtituloTorneo").innerHTML =
+"🇨🇴 Torneo de la División Mayor del Fútbol Colombiano";
+
+}
 
 }
   
