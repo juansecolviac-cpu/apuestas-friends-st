@@ -205,21 +205,6 @@ color:gold;
 <button class="primary" onclick="showTab('apuestas')">Apuestas</button>
 <button class="primary" onclick="showTab('tabla')">Tabla</button>
 <button class="primary" onclick="showTab('estadisticas')">Estadísticas</button>
-  
-  <button
-id="btnLiga"
-class="primary hidden"
-onclick="showTab('liga')">
-Liga
-</button>
-
-  <button
-id="btnEquipos"
-class="primary hidden"
-onclick="showTab('equipos')">
-Equipos
-</button>
-  
 <button class="primary" onclick="showTab('fases')">Fases Finales</button>
 <button class="primary" onclick="showTab('grupos')">Grupos</button>
 <button class="primary" onclick="showTab('dieciseisavos')">16avos</button>
@@ -250,40 +235,6 @@ Equipos
 <h2>Agregar Partido</h2>
 
   <hr>
-
-<h3>⚙️ Configuración del torneo</h3>
-
-<label>Nombre del torneo</label><br>
-
-<input
-id="nombreTorneo"
-placeholder="Ej: Mundial 2026">
-
-<br><br>
-
-<label>Tipo de torneo</label><br>
-
-<select id="tipoTorneo">
-
-<option value="mundial">
-🌍 Mundial
-</option>
-
-<option value="liga">
-🇨🇴 Liga Colombiana
-</option>
-
-</select>
-
-<br><br>
-
-<button
-class="primary"
-onclick="guardarConfiguracion()">
-Guardar configuración
-</button>
-
-<hr>
 
 <select id="paisA"></select>
 <span class="vs">VS</span>
@@ -390,64 +341,6 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <tbody id="stats"></tbody>
 
 </table>
-</div>
-
-  <div id="liga" class="card hidden">
-
-<h2>🇨🇴 Liga Colombiana</h2>
-
-<h3>Tabla de posiciones</h3>
-
-<div id="tablaLiga">
-
-<p>Aún no hay datos.</p>
-
-</div>
-
-</div>
-
-  <div id="equipos" class="card hidden">
-
-<h2>⚙️ Equipos</h2>
-
-<div id="panelEquipos" class="hidden">
-
-<input
-id="nombreEquipo"
-placeholder="Nombre del equipo">
-
-<br><br>
-
-<input
-id="ciudadEquipo"
-placeholder="Ciudad">
-
-<br><br>
-
-<input
-id="estadioEquipo"
-placeholder="Estadio">
-
-<br><br>
-
-<button
-class="primary"
-onclick="guardarEquipo()">
-Guardar Equipo
-</button>
-
-<hr>
-
-</div>
-
-<h3>Equipos registrados</h3>
-
-<div id="listaEquipos">
-
-Aún no hay equipos.
-
-</div>
-
 </div>
 
 <div id="fases" class="card hidden">
@@ -715,15 +608,9 @@ appId: "1:805704838263:web:15e37a55c8b428442daa72"
 };
 
 const appFirebase = initializeApp(firebaseConfig);
-const db = getFirestore(appFirebase);
-
-  let configuracion = {
-nombre: "FIFA World Cup 2026",
-tipo: "mundial"
-};
-  
-const users={tatan18:"1",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",conde:"1111",felipe:"1111",huevo:"1111"};
-const players=["Simon","Junior","David","Tatan","Santiago","Conde","Felipe","Huevo"];
+const db = getFirestore(appFirebase)
+const users={tatan18:"1",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",conde:"1111",felipe:"1111",huevo:"1111",luis:"luis2026"};
+const players=["Simon","Junior","David","Tatan","Santiago","Conde","Felipe","Huevo","Luis"];
 
   const clavesJugadores = {
     Simon: "Simon",
@@ -734,6 +621,7 @@ const players=["Simon","Junior","David","Tatan","Santiago","Conde","Felipe","Hue
     Conde: "Karda",
     Felipe: "Felipe",
     Huevo: "Huevo"
+    Luis:"Luis",
 };
   
   let usuarioActual = "";
@@ -975,7 +863,7 @@ snapshot.forEach(doc=>{
 
 console.log("PARTIDOS:", data);
 
-let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0,Conde:20,Felipe:20,Huevo:20};
+let s={Simon:0,Junior:0,David:0,Tatan:0,Santiago:0,Conde:20,Felipe:20,Huevo:20,Luis:95};
 
 data.forEach(m=>{
   players.forEach(j=>{
@@ -1772,95 +1660,11 @@ document.getElementById("penalesBox").style.display="none";
 }
 
 }
-
-  async function guardarConfiguracion(){
-
-try{
-
-await setDoc(
-
-doc(db,"configuracion","torneo"),
-
-{
-
-nombre:document.getElementById("nombreTorneo").value,
-
-tipo:document.getElementById("tipoTorneo").value
-
-}
-
-);
-
-alert("Configuración guardada correctamente");
-
-}catch(error){
-
-console.error(error);
-
-alert("Error al guardar la configuración");
-
-}
-
-}
-
-  async function cargarConfiguracion(){
-
-const snap = await getDoc(
-doc(db,"configuracion","torneo")
-);
-
-if(!snap.exists()) return;
-
-configuracion = snap.data();
-
-document.getElementById("nombreTorneo").value =
-configuracion.nombre || "";
-
-document.getElementById("tipoTorneo").value =
-configuracion.tipo || "mundial";
-
-    document.getElementById("tituloTorneo").innerHTML =
-"🏆 " + configuracion.nombre + " - FRIENDS ST 🏆";
-
-if(configuracion.tipo=="mundial"){
-
-document.getElementById("subtituloTorneo").innerHTML =
-"🇲🇽 México • 🇺🇸 Estados Unidos • 🇨🇦 Canadá";
-
-}else{
-
-document.getElementById("subtituloTorneo").innerHTML =
-"🇨🇴 Torneo de la División Mayor del Fútbol Colombiano";
-
-if(configuracion.tipo=="liga"){
-
-document.getElementById("btnLiga").classList.remove("hidden");
-
-document.getElementById("btnEquipos").classList.remove("hidden");
-
-}else{
-
-document.getElementById("btnLiga").classList.add("hidden");
-
-document.getElementById("btnEquipos").classList.add("hidden");
-
-}
-
-}
-
-}
-
-  async function iniciarConfiguracion(){
-
-await cargarConfiguracion();
-
-}
   
   window.login = login;
 window.showTab = showTab;
 window.saveMatch = saveMatch;
 window.calc = calc;
-window.guardarConfiguracion = guardarConfiguracion;
 window.borrarHistorial = borrarHistorial;
 window.filtrarPartidos = filtrarPartidos;
 window.filtrarApuestas = filtrarApuestas;
@@ -1873,7 +1677,6 @@ window.mostrarPenales = mostrarPenales;
    }
 },3000);
   console.log("guardarLlave cargada");
-  iniciarConfiguracion();
 
 
 </script></body></html>
