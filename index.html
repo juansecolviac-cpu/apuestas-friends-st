@@ -186,7 +186,7 @@ color:gold;
 <div class="side r">🇨🇦🇺🇸🇲🇽🐺⚽🏆🇨🇦🇺🇸🇲🇽</div>
 
 <header>
-<h1 id="tituloTorneo">🏆 FIFA WORLD CUP 2026 - FRIENDS ST 🏆</h1>
+<h1 id="tituloTorneo">🏆 FIFA World Cup 2026 - FRIENDS ST 🏆</h1>
 <p id="subtituloTorneo">🇲🇽 México • 🇺🇸 Estados Unidos • 🇨🇦 Canadá</p>
 </header>
 
@@ -205,6 +205,14 @@ color:gold;
 <button class="primary" onclick="showTab('apuestas')">Apuestas</button>
 <button class="primary" onclick="showTab('tabla')">Tabla</button>
 <button class="primary" onclick="showTab('estadisticas')">Estadísticas</button>
+  
+  <button
+id="btnLiga"
+class="primary hidden"
+onclick="showTab('liga')">
+Liga
+</button>
+  
 <button class="primary" onclick="showTab('fases')">Fases Finales</button>
 <button class="primary" onclick="showTab('grupos')">Grupos</button>
 <button class="primary" onclick="showTab('dieciseisavos')">16avos</button>
@@ -375,6 +383,20 @@ style="width:300px;max-width:100%;margin-bottom:10px;">
 <tbody id="stats"></tbody>
 
 </table>
+</div>
+
+  <div id="liga" class="card hidden">
+
+<h2>🇨🇴 Liga Colombiana</h2>
+
+<h3>Tabla de posiciones</h3>
+
+<div id="tablaLiga">
+
+<p>Aún no hay datos.</p>
+
+</div>
+
 </div>
 
 <div id="fases" class="card hidden">
