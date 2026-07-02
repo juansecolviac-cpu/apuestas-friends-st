@@ -643,6 +643,12 @@ appId: "1:805704838263:web:15e37a55c8b428442daa72"
 
 const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase);
+
+  let configuracion = {
+nombre: "FIFA World Cup 2026",
+tipo: "mundial"
+};
+  
 const users={tatan18:"1",simon:"1111",junior:"1111",david:"1111",tatan:"1111",santiago:"1111",conde:"1111",felipe:"1111",huevo:"1111"};
 const players=["Simon","Junior","David","Tatan","Santiago","Conde","Felipe","Huevo"];
 
@@ -1732,13 +1738,13 @@ doc(db,"configuracion","torneo")
 
 if(!snap.exists()) return;
 
-const datos = snap.data();
+configuracion = snap.data();
 
 document.getElementById("nombreTorneo").value =
-datos.nombre || "";
+configuracion.nombre || "";
 
 document.getElementById("tipoTorneo").value =
-datos.tipo || "mundial";
+configuracion.tipo || "mundial";
 
 }
   
