@@ -1762,6 +1762,12 @@ document.getElementById("subtituloTorneo").innerHTML =
 }
 
 }
+
+  async function iniciarConfiguracion(){
+
+await cargarConfiguracion();
+
+}
   
   window.login = login;
 window.showTab = showTab;
@@ -1780,6 +1786,7 @@ window.mostrarPenales = mostrarPenales;
    }
 },3000);
   console.log("guardarLlave cargada");
+  iniciarConfiguracion();
 
 
 </script></body></html>
