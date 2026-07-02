@@ -1781,6 +1781,16 @@ document.getElementById("subtituloTorneo").innerHTML =
 document.getElementById("subtituloTorneo").innerHTML =
 "🇨🇴 Torneo de la División Mayor del Fútbol Colombiano";
 
+if(configuracion.tipo=="liga"){
+
+document.getElementById("btnLiga").classList.remove("hidden");
+
+}else{
+
+document.getElementById("btnLiga").classList.add("hidden");
+
+}
+
 }
 
 }
