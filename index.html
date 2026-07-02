@@ -1279,7 +1279,14 @@ document.getElementById("liderActual").innerHTML =
 
   function actualizarUsuarios(){
 
-document.getElementById("infoUsuario").innerHTML =
+const info = document.getElementById("infoUsuario");
+const lista = document.getElementById("listaUsuarios");
+
+if(!info || !lista){
+    return;
+}
+
+info.innerHTML =
 usuarioActual +
 "<br>" +
 (esAdmin ? "🔑 Administrador" : "👤 Usuario");
@@ -1298,7 +1305,7 @@ u +
 
 });
 
-document.getElementById("listaUsuarios").innerHTML = html;
+lista.innerHTML = html;
 
 }
 
@@ -1685,11 +1692,42 @@ document.getElementById("penalesBox").style.display="none";
 }
 
 }
+
+  async function guardarConfiguracion(){
+
+try{
+
+await setDoc(
+
+doc(db,"configuracion","torneo"),
+
+{
+
+nombre:document.getElementById("nombreTorneo").value,
+
+tipo:document.getElementById("tipoTorneo").value
+
+}
+
+);
+
+alert("Configuración guardada correctamente");
+
+}catch(error){
+
+console.error(error);
+
+alert("Error al guardar la configuración");
+
+}
+
+}
   
   window.login = login;
 window.showTab = showTab;
 window.saveMatch = saveMatch;
 window.calc = calc;
+window.guardarConfiguracion = guardarConfiguracion;
 window.borrarHistorial = borrarHistorial;
 window.filtrarPartidos = filtrarPartidos;
 window.filtrarApuestas = filtrarApuestas;
