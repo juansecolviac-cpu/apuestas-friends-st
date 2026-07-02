@@ -746,6 +746,7 @@ actualizarUsuarios();
 actualizarGrupos();
 actualizarFases();
 cargarLlave();
+cargarConfiguracion();
 
   if(!esAdmin){
 
@@ -1720,6 +1721,24 @@ console.error(error);
 alert("Error al guardar la configuración");
 
 }
+
+}
+
+  async function cargarConfiguracion(){
+
+const snap = await getDoc(
+doc(db,"configuracion","torneo")
+);
+
+if(!snap.exists()) return;
+
+const datos = snap.data();
+
+document.getElementById("nombreTorneo").value =
+datos.nombre || "";
+
+document.getElementById("tipoTorneo").value =
+datos.tipo || "mundial";
 
 }
   
